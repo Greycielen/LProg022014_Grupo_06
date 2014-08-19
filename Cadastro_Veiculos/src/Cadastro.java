@@ -2,43 +2,44 @@ import java.util.Scanner;
 
 public class Cadastro {
 
-
-	public static void main() {
+	public static void main(String[] args) {
 		DadosCadastro data = new DadosCadastro();
+		int opcao = 0;
+		while (opcao != 4) {
+			menu();
+			opcao = lerOpcao();
 
-		menu();
-		int opcao = lerOpcao();
+			switch (opcao) {
+			case 1:
+				Funcionario func = obterDados();
+				data.armazenarDados(func);
+				break;
 
-		switch (opcao) {
-		case 1:
-			Funcionario func = obter_dados();
-			data.armazenarDados(func);
-			break;
+			case 2:
+				consultarDados(data);
+				alterarDados();
+				break;
 
-		case 2:
-			consultarDados(data);
-			alterarDados();
-			break;
+			case 3:
+				break;
 
-		case 3:
-			break;
-
-		default:
-			break;
+			default:
+				break;
+			}
 		}
-
 	}
 
 	private static void alterarDados() {
-		
+
 	}
 
 	private static void consultarDados(DadosCadastro data) {
 		Funcionario func = data.consultarDados();
-		//Exibir os dados
+		// Exibir os dados
 		System.out.println("Nome: " + func.getNome());
 		System.out.println("Login: " + func.getLogin());
-		System.out.println("Enquadramento Funcional: " + func.getEnquadramento_funcional());
+		System.out.println("Enquadramento Funcional: "
+				+ func.getEnquadramento_funcional());
 	}
 
 	private static int lerOpcao() {
@@ -53,12 +54,13 @@ public class Cadastro {
 		System.out.println("1) Cadastrar Usuario");
 		System.out.println("2) Alterar Dados de Usuario");
 		System.out.println("3) Excluir Usuario");
+		System.out.println("4) Sair");
 	}
-	
+
 	private static Funcionario obterDados() {
 		Scanner leitor = new Scanner(System.in);
 		Funcionario func = new Funcionario();
-		
+
 		System.out.println("Digite o nome do usuario");
 		String nome = leitor.next();
 		func.setNome(nome);
@@ -71,8 +73,11 @@ public class Cadastro {
 		String senha = leitor.next();
 		func.setLogin(senha);
 
-		System.out.println("Qual o enquadramento funcional (cargo) do usuario ?");
+		System.out
+				.println("Qual o enquadramento funcional (cargo) do usuario ?");
 		String enquadramento_funcional = leitor.next();
-		func.setEnquadramento_funcional(enquadramento_funcional);		
+		func.setEnquadramento_funcional(enquadramento_funcional);
+
+		return func;
 	}
 }
