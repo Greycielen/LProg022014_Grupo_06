@@ -7,12 +7,12 @@ public class SistemaVeiculo {
     private BancoDeDados banco;
     
     private void escreverOpcoes() {
-        System.out.println("------------------------");
-        System.out.println("Cadastro de Veículos");
+        System.out.println("Bem vindo ao Cadastro de Veículos, digite a opção desejada:");
         System.out.println();
-        System.out.println("Digite o número da opção desejada");
         System.out.println("1) Cadastrar veículo");
-        System.out.println("9) Fechar");
+        System.out.println("2) Consultar/Alterar cadastro de veículo");
+        System.out.println("3) Excluir cadastro de veículo");
+        System.out.println("4) Sair");
         
     }
     
@@ -57,7 +57,7 @@ public class SistemaVeiculo {
         System.out.println("Digite o nome do proprietário do veículo");
         veiculo.setProprietario(scanner.nextLine());
         
-        System.out.println("Digite o contato do proprietário do 	veículo");
+        System.out.println("Digite o contato do proprietário do veículo");
         veiculo.setContato(scanner.nextLine());
         
         System.out.println("Digite o ano de fabricação do veículo");
