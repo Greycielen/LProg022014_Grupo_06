@@ -5,6 +5,7 @@ public class CadastroDeVeiculo {
     private String cor;
     private String placa;
     private String proprietario;
+    private String contato;
     private int ano;
     
     public String getModelo(){
@@ -22,6 +23,10 @@ public class CadastroDeVeiculo {
     
     public String getProprietario(){
         return proprietario;
+    }
+    
+    public String getcontato(){
+        return contato;
     }
     
     public int getAno(){
@@ -42,6 +47,10 @@ public class CadastroDeVeiculo {
     
     public void setProprietario(String proprietario){
         this.proprietario = proprietario;
+    }
+    
+    public void setContato (String contato){
+        this.contato = contato;
     }
     
     public void setAno(int ano){

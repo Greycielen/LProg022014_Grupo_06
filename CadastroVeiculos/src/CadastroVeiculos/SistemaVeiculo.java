@@ -57,6 +57,9 @@ public class SistemaVeiculo {
         System.out.println("Digite o proprietário");
         veiculo.setProprietario(scanner.nextLine());
         
+        System.out.println("Digite o contato");
+        veiculo.setContato(scanner.nextLine());
+        
         System.out.println("Digite o ano");
         veiculo.setAno(scanner.nextInt());
         
