@@ -8,11 +8,11 @@ public class SistemaVeiculo {
     
     private void escreverOpcoes() {
         System.out.println("------------------------");
-        System.out.println("Cadastro de Veiculos");
+        System.out.println("Cadastro de Veículos");
         System.out.println();
-        System.out.println("Opções:");
-        System.out.println("1-Cadastrar veículo");
-        System.out.println("9-Fechar");
+        System.out.println("Digite o número da opção desejada");
+        System.out.println("1) Cadastrar veículo");
+        System.out.println("9) Fechar");
         
     }
     
@@ -42,25 +42,25 @@ public class SistemaVeiculo {
         
         CadastroDeVeiculo veiculo = new CadastroDeVeiculo();
         
-        System.out.println("1-Cadastro de veículos");
+        System.out.println("1) Cadastro de veículos");
         System.out.println();
         
-        System.out.println("Digite o modelo");
+        System.out.println("Digite o modelo do veículo");
         veiculo.setModelo(scanner.nextLine());
         
-        System.out.println("Digite a cor");
+        System.out.println("Digite a cor do veículo");
         veiculo.setCor(scanner.nextLine());
         
-        System.out.println("Digite a placa");
+        System.out.println("Digite a placa do veículo");
         veiculo.setPlaca(scanner.nextLine());
         
-        System.out.println("Digite o proprietário");
+        System.out.println("Digite o nome do proprietário do veículo");
         veiculo.setProprietario(scanner.nextLine());
         
-        System.out.println("Digite o contato");
+        System.out.println("Digite o contato do proprietário do 	veículo");
         veiculo.setContato(scanner.nextLine());
         
-        System.out.println("Digite o ano");
+        System.out.println("Digite o ano de fabricação do veículo");
         veiculo.setAno(scanner.nextInt());
         
         banco.cadastrarVeiculo(veiculo);
