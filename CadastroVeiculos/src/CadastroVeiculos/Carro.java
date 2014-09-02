@@ -25,7 +25,7 @@ public class Carro {
 		return proprietario;
 	}
 
-	public String getcontato() {
+	public String getContato() {
 		return contato;
 	}
 
