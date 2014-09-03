@@ -7,20 +7,18 @@ public class Interface_Veiculos {
 	private BancoDeDados banco;
 
 	private void escreverOpcoes() {
-		System.out
-				.println("Bem vindo ao Cadastro de Veículos, digite a opção desejada:");
+		System.out.println("Bem vindo ao Cadastro de Veículos, digite a opção desejada:");
 		System.out.println();
 		System.out.println("1) Cadastrar veículo");
 		System.out.println("2) Consultar/Alterar cadastro de veículo");
 		System.out.println("3) Excluir cadastro de veículo");
 		System.out.println("4) Sair");
-
 	}
 
 	public void iniciar() {
 
 		banco = new BancoDeDados();
-		escreverOpcoes(); // Chamou o método escreverOpções.
+		escreverOpcoes();
 
 		Scanner teclado = new Scanner(System.in);
 		int opcao = teclado.nextInt();
@@ -31,8 +29,7 @@ public class Interface_Veiculos {
 				cadastrarVeiculo();
 				break;
 			case 2:
-				System.out.println("\n"
-						+ "2) Consultar/Alterar cadastro de veículo" + "\n");
+				System.out.println("\n" + "2) Consultar/Alterar cadastro de veículo" + "\n");
 				System.out.println("Digite a placa do veículo:");
 				String placa = teclado.next();
 				consultarVeiculo(banco, placa);
@@ -52,10 +49,8 @@ public class Interface_Veiculos {
 		System.out.println("Cor: " + veiculo.getCor());
 		System.out.println("Placa: " + veiculo.getPlaca());
 		System.out.println("Ano de Fabricação: " + veiculo.getAno());
-		System.out
-				.println("Nome do Proprietário: " + veiculo.getProprietario());
-		System.out.println("Contato do Proprietário: " + veiculo.getContato()
-				+ "\n");
+		System.out.println("Nome do Proprietário: " + veiculo.getProprietario());
+		System.out.println("Contato do Proprietário: " + veiculo.getContato() + "\n");
 	}
 
 	public void cadastrarVeiculo() {
@@ -85,7 +80,7 @@ public class Interface_Veiculos {
 		System.out.println("Digite o ano de fabricação do veículo");
 		veiculo.setAno(scanner.nextInt());
 
-		banco.cadastrarVeiculo(veiculo);
+		banco.salvarVeiculo(veiculo);
 	}
 
 	public static void main(String[] args) {

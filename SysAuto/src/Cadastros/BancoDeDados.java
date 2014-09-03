@@ -4,20 +4,24 @@ import java.util.ArrayList;
 
 public class BancoDeDados {
 
-	private ArrayList<Veiculo> listaCadastro;
+	private ArrayList<Veiculo> listaVeiculos;
+	private ArrayList<Funcionario> listaFuncionarios;
 
-	// Método construtor
 	public BancoDeDados() {
-		listaCadastro = new ArrayList<Veiculo>();
+		listaVeiculos = new ArrayList<Veiculo>();
+		listaFuncionarios = new ArrayList<Funcionario>();
 	}
 
-	// Método para cadastrar veículos.
-	public void cadastrarVeiculo(Veiculo cadastro) {
-		listaCadastro.add(cadastro);
+	public void salvarFuncionario(Funcionario cadastro) {
+		listaFuncionarios.add(cadastro);
+	}
+
+	public void salvarVeiculo(Veiculo cadastro) {
+		listaVeiculos.add(cadastro);
 	}
 
 	public Veiculo getVeiculo(String placa) {
-		for (Veiculo veiculo : listaCadastro) {
+		for (Veiculo veiculo : listaVeiculos) {
 			if (veiculo.getPlaca().contentEquals(placa)) {
 				return veiculo;
 			}
@@ -25,4 +29,12 @@ public class BancoDeDados {
 		return null;
 	}
 
+	public Funcionario getFuncionario(String login) {
+		for (Funcionario funcionario : listaFuncionarios) {
+			if (funcionario.getLogin().contentEquals(login)) {
+				return funcionario;
+			}
+		}
+		return null;
+	}
 }
