@@ -3,10 +3,12 @@ LProg022014_Grupo_06
 
 SysAuto
 
-Para instalar o banco de dados basta:
+Instruções Para Instalação do Banco de Dados:
 
-1) Abrir a ferramenta PHPMYADMIN
-2) Selecionar a aba Importar
-3) Clicar em "escolher arquivo"
-4) selecione o arquivo sysautobd_schema.sql que está em "SysAuto/src/Persistencia/Arquivos"
-5) Clicar em executar
+1) Abra a ferramenta PHPMYADMIN
+2) Selecione a aba Importar
+3) Clique em "escolher arquivo"
+4) Selecione o arquivo sysautobd_schema.sql que está em "SysAuto/src/Persistencia/Arquivos"
+5) Clique em executar
+
+Se não ocorrer nenhum alerta de erro, o banco de dados foi instalado com exito!
