@@ -8,5 +8,5 @@ Para instalar o banco de dados basta:
 1) Abrir a ferramenta PHPMYADMIN
 2) Selecionar a aba Importar
 3) Clicar em "escolher arquivo"
-4) selecione o arquivo sysautobd_schema.sql que est· em "SysAuto/src/Persistencia/"
+4) selecione o arquivo sysautobd_schema.sql que est√° em "SysAuto/src/Persistencia/Arquivos"
 5) Clicar em executar
