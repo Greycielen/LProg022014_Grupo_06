@@ -1,6 +1,6 @@
-package Cadastros;
+package Modelos;
 
-public class Funcionario {
+public class ModeloFuncionario {
 	private String nome;
 	private String enquadramento_funcional;
 	private String login;

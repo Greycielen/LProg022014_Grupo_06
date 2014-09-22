@@ -1,9 +1,18 @@
-package Cadastros;
+package Modelos;
 
-public class Produto_Servico {
+public class ModeloProduto {
+	private String codigo;
 	private String nome;
 	private String enquadramento;
-	private int valor;
+	private String valor;
+
+	public String getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
 
 	public String getNome() {
 		return nome;
@@ -21,12 +30,11 @@ public class Produto_Servico {
 		this.enquadramento = enquadramento;
 	}
 
-	public int getValor() {
+	public String getValor() {
 		return valor;
 	}
 
-	public void setValor(int valor) {
+	public void setValor(String valor) {
 		this.valor = valor;
 	}
-
 }

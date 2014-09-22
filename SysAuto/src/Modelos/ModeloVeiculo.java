@@ -1,12 +1,12 @@
-package Cadastros;
+package Modelos;
 
-public class Veiculo {
+public class ModeloVeiculo {
 	private String modelo;
 	private String cor;
 	private String placa;
 	private String proprietario;
 	private String contato;
-	private int ano;
+	private String ano;
 
 	public String getModelo() {
 		return modelo;
@@ -48,11 +48,11 @@ public class Veiculo {
 		this.contato = contato;
 	}
 
-	public int getAno() {
+	public String getAno() {
 		return ano;
 	}
 
-	public void setAno(int ano) {
+	public void setAno(String ano) {
 		this.ano = ano;
 	}
 
