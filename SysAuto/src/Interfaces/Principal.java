@@ -1,16 +1,17 @@
 package Interfaces;
 
 import java.awt.EventQueue;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JMenu;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 @SuppressWarnings("serial")
 public class Principal extends JFrame {
@@ -65,6 +66,9 @@ public class Principal extends JFrame {
 				funcionariosgui.setVisible(true);
 			}
 		});
+
+		setTitle("SysAuto");
+		setResizable(false);
 
 		mnCadastros.add(mntmFuncionarios);
 
