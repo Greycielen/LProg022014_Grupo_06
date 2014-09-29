@@ -104,10 +104,10 @@ public class Persistencia {
 
 		ArrayList<String> lista_veiculos = new ArrayList<String>();
 
-		this.executaSQL("SELECT concat(modelo,' <',placa,'> ') FROM veiculos ORDER BY concat(modelo,' <',placa,'> ') ASC");
+		this.executaSQL("SELECT concat(' <',placa,'> ', modelo) FROM veiculos ORDER BY concat(' <',placa,'> ', modelo) ASC");
 		this.rs.first();
 		do {
-			lista_veiculos.add(this.rs.getString("concat(modelo,' <',placa,'> ')"));
+			lista_veiculos.add(this.rs.getString("concat(' <',placa,'> ', modelo)"));
 		} while (this.rs.next());
 
 		return lista_veiculos;

@@ -67,8 +67,7 @@ public class CadastroVeiculos extends JFrame {
 	public void preencheCampos(JComboBox<String> comboVeiculo) {
 
 		String concatenado = (String) comboVeiculo.getSelectedItem();
-		String desconcatenado[] = concatenado.split(" <");
-		String placa = desconcatenado[1].substring(0, 7);
+		String placa = concatenado.substring(2, 9);
 
 		try {
 
