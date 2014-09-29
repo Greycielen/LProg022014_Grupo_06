@@ -94,7 +94,9 @@ public class Persistencia {
 
 	public void excluirProduto(String codigo) throws SQLException {
 
-		this.executaSQL("DELETE FROM produtos WHERE idProduto = '" + codigo + "'");
+		PreparedStatement pst = this.con.prepareStatement("DELETE FROM produtos WHERE idProduto = ?");
+		pst.setString(1, codigo);
+		pst.execute();
 
 	}
 
@@ -156,7 +158,9 @@ public class Persistencia {
 
 	public void excluirVeiculo(String placa) throws SQLException {
 
-		this.executaSQL("DELETE FROM veiculos WHERE placa = '" + placa + "'");
+		PreparedStatement pst = this.con.prepareStatement("DELETE FROM veiculos WHERE placa = ?");
+		pst.setString(1, placa);
+		pst.execute();
 
 	}
 
@@ -164,7 +168,7 @@ public class Persistencia {
 
 		ArrayList<String> lista_funcionarios = new ArrayList<String>();
 
-		this.executaSQL("SELECT * FROM funcionarios ORDER BY nome");
+		this.executaSQL("SELECT * FROM sysauto.funcionarios ORDER BY funcionarios.nome");
 		this.rs.first();
 		do {
 			lista_funcionarios.add(this.rs.getString("nome"));
@@ -182,6 +186,7 @@ public class Persistencia {
 		this.rs.first();
 		funcionario.setNome(this.rs.getString("nome"));
 		funcionario.setLogin(this.rs.getString("login"));
+		funcionario.setSenha(this.rs.getString("senha"));
 		funcionario.setEnquadramento_funcional(this.rs.getString("enquadramento_funcional"));
 
 		return funcionario;
@@ -212,7 +217,9 @@ public class Persistencia {
 
 	public void excluirFuncionario(String login) throws SQLException {
 
-		this.executaSQL("DELETE FROM funcionarios WHERE funcionarios.login = '" + login + "'");
+		PreparedStatement pst = this.con.prepareStatement("DELETE FROM funcionarios WHERE login = ?");
+		pst.setString(1, login);
+		pst.execute();
 
 	}
 }
