@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+
 import Modelos.ModeloFuncionario;
 import Modelos.ModeloProduto;
 import Modelos.ModeloVeiculo;
@@ -41,7 +42,7 @@ public class Persistencia {
 
 	}
 
-	public ArrayList<String> preencherComboProdutos() throws SQLException {
+	public ArrayList<String> listarProdutos() throws SQLException {
 
 		ArrayList<String> lista_produtos = new ArrayList<String>();
 
@@ -91,11 +92,10 @@ public class Persistencia {
 
 	}
 
-	public void excluirProduto(ModeloProduto produto) throws SQLException {
+	public void excluirProduto(String codigo) throws SQLException {
 
-		PreparedStatement pst = this.con.prepareStatement("DELETE FROM produtos WHERE idProduto = ?");
-		pst.setString(1, produto.getCodigo());
-		pst.execute();
+		this.executaSQL("DELETE FROM produtos WHERE idProduto = '" + codigo + "'");
+
 	}
 
 	public ArrayList<String> listarVeiculos() throws SQLException {
@@ -111,11 +111,11 @@ public class Persistencia {
 		return lista_veiculos;
 	}
 
-	public ModeloVeiculo consultarVeiculo(String modelo) throws SQLException {
+	public ModeloVeiculo consultarVeiculo(String placa) throws SQLException {
 
 		ModeloVeiculo veiculo = new ModeloVeiculo();
 
-		this.executaSQL("SELECT * FROM veiculos WHERE modelo = '" + modelo + "'");
+		this.executaSQL("SELECT * FROM veiculos WHERE placa = '" + placa + "'");
 		this.rs.first();
 		veiculo.setPlaca(this.rs.getString("placa"));
 		veiculo.setModelo(this.rs.getString("modelo"));
@@ -156,9 +156,7 @@ public class Persistencia {
 
 	public void excluirVeiculo(String placa) throws SQLException {
 
-		PreparedStatement pst = this.con.prepareStatement("DELETE FROM veiculos WHERE placa = ?");
-		pst.setString(1, placa);
-		pst.execute();
+		this.executaSQL("DELETE FROM veiculos WHERE placa = '" + placa + "'");
 
 	}
 
@@ -214,9 +212,7 @@ public class Persistencia {
 
 	public void excluirFuncionario(String login) throws SQLException {
 
-		PreparedStatement pst = this.con.prepareStatement("DELETE FROM funcionarios WHERE funcionarios.login = ?");
-		pst.setString(1, login);
-		pst.execute();
+		this.executaSQL("DELETE FROM funcionarios WHERE funcionarios.login = '" + login + "'");
 
 	}
 }
