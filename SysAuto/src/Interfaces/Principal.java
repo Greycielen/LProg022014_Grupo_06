@@ -12,6 +12,9 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import java.awt.Color;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
 
 @SuppressWarnings("serial")
 public class Principal extends JFrame {
@@ -81,12 +84,26 @@ public class Principal extends JFrame {
 		JMenuItem mntmRelatorioDeSaida = new JMenuItem("Relat\u00F3rio de Sa\u00EDda do Ve\u00EDculo");
 		mnRelatorios.add(mntmRelatorioDeSaida);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		
+		JLabel lblImagem = new JLabel("");
+		lblImagem.setIcon(new ImageIcon("C:\\Users\\Guilherme\\git\\LProg022014_Grupo_06\\SysAuto\\src\\Persistencia\\Arquivos\\Sysauto.png"));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGap(0, 424, Short.MAX_VALUE));
-		gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGap(0, 252, Short.MAX_VALUE));
+		gl_contentPane.setHorizontalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(91)
+					.addComponent(lblImagem)
+					.addContainerGap(103, Short.MAX_VALUE))
+		);
+		gl_contentPane.setVerticalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addComponent(lblImagem)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
 		contentPane.setLayout(gl_contentPane);
 	}
-
 }
