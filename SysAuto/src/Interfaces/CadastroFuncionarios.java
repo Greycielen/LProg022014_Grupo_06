@@ -39,6 +39,7 @@ public class CadastroFuncionarios extends JFrame {
 	private JLabel lblEnquadramentoFuncional;
 	private JPasswordField passwordSenha;
 	private JTextField textNome;
+	private JLabel lblNivel;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -53,9 +54,11 @@ public class CadastroFuncionarios extends JFrame {
 		});
 	}
 
-	public void preencherCombo(JComboBox<String> comboFuncionario) throws SQLException {
+	public void preencherCombos(JComboBox<String> comboFuncionario, JComboBox<String> comboNivel) throws SQLException {
 
 		comboFuncionario.addItem("<NOVO FUNCIONARIO>");
+		comboNivel.addItem("1 - Operacional");
+		comboNivel.addItem("2 - Administrativo");
 
 		for (int i = 0; i < regras.listaFuncionarios().size(); i++) {
 
@@ -63,7 +66,7 @@ public class CadastroFuncionarios extends JFrame {
 		}
 	}
 
-	public void preencherCampos(JComboBox<String> comboFuncionario) {
+	public void preencherCampos(JComboBox<String> comboFuncionario, JComboBox<String> comboNivel) {
 
 		try {
 
@@ -75,6 +78,7 @@ public class CadastroFuncionarios extends JFrame {
 			textLogin.setText(funcionario.getLogin());
 			passwordSenha.setText(funcionario.getSenha());
 			textEnquadramento_Funcional.setText(funcionario.getEnquadramento_funcional());
+			comboNivel.setSelectedItem(funcionario.getNivel_acesso());
 
 		} catch (SQLException ex) {
 			JOptionPane.showMessageDialog(null, "Descrição do erro:\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
@@ -83,19 +87,21 @@ public class CadastroFuncionarios extends JFrame {
 	}
 
 	@SuppressWarnings("deprecation")
-	public void lerCampos() {
+	public void lerCampos(JComboBox<String> comboNivel) {
 		funcionario.setLogin(textLogin.getText());
 		funcionario.setNome(textNome.getText());
 		funcionario.setSenha(passwordSenha.getText());
 		funcionario.setEnquadramento_funcional(textEnquadramento_Funcional.getText());
+		funcionario.setNivel_acesso((String) comboNivel.getSelectedItem().toString());
 	}
 
-	public void limparCampos(JComboBox<String> comboFuncionario) {
+	public void limparCampos(JComboBox<String> comboFuncionario, JComboBox<String> comboNivel) {
 
 		comboFuncionario.removeAllItems();
+		comboNivel.removeAllItems();
 
 		try {
-			preencherCombo(comboFuncionario);
+			preencherCombos(comboFuncionario, comboNivel);
 		} catch (SQLException ex) {
 			JOptionPane.showMessageDialog(null, "Descrição do erro:\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
 		}
@@ -109,6 +115,8 @@ public class CadastroFuncionarios extends JFrame {
 
 	public CadastroFuncionarios() {
 
+		final JComboBox<String> comboNivel = new JComboBox<String>();
+
 		final JComboBox<String> comboFuncionario = new JComboBox<String>();
 		comboFuncionario.addPopupMenuListener(new PopupMenuListener() {
 			public void popupMenuCanceled(PopupMenuEvent e) {
@@ -119,16 +127,17 @@ public class CadastroFuncionarios extends JFrame {
 				String nome_selecionado = (String) comboFuncionario.getSelectedItem().toString();
 
 				if (nome_selecionado == "<NOVO FUNCIONARIO>") {
-					limparCampos(comboFuncionario);
+					limparCampos(comboFuncionario, comboNivel);
 					comboFuncionario.setSelectedItem((String) "<NOVO FUNCIONARIO>");
 				} else {
-					preencherCampos(comboFuncionario);
+					preencherCampos(comboFuncionario, comboNivel);
 				}
 			}
 
 			public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
 
 			}
+
 		});
 
 		try {
@@ -138,7 +147,7 @@ public class CadastroFuncionarios extends JFrame {
 		}
 
 		try {
-			preencherCombo(comboFuncionario);
+			preencherCombos(comboFuncionario, comboNivel);
 		} catch (SQLException ex) {
 			JOptionPane.showMessageDialog(null, "Cadastre ao menos um funcionário!", "Erro", JOptionPane.ERROR_MESSAGE);
 		}
@@ -147,7 +156,7 @@ public class CadastroFuncionarios extends JFrame {
 		setResizable(false);
 
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 320, 280);
+		setBounds(100, 100, 320, 320);
 
 		lblNome = new JLabel("Nome");
 		lblNome.setFont(new Font("Arial", Font.BOLD, 12));
@@ -192,7 +201,7 @@ public class CadastroFuncionarios extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 
-				lerCampos();
+				lerCampos(comboNivel);
 
 				try {
 					regras.cadastraFuncionario(funcionario);
@@ -200,7 +209,7 @@ public class CadastroFuncionarios extends JFrame {
 					JOptionPane.showMessageDialog(null, "Descrição do erro:\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
 				}
 
-				limparCampos(comboFuncionario);
+				limparCampos(comboFuncionario, comboNivel);
 
 			}
 		});
@@ -210,7 +219,7 @@ public class CadastroFuncionarios extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 
-				lerCampos();
+				lerCampos(comboNivel);
 
 				try {
 					regras.atualizaFuncionario(funcionario);
@@ -218,7 +227,7 @@ public class CadastroFuncionarios extends JFrame {
 					JOptionPane.showMessageDialog(null, "Descrição do erro:\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
 				}
 
-				limparCampos(comboFuncionario);
+				limparCampos(comboFuncionario, comboNivel);
 
 			}
 		});
@@ -229,16 +238,19 @@ public class CadastroFuncionarios extends JFrame {
 			public void mouseClicked(MouseEvent arg0) {
 
 				try {
-					lerCampos();
+					lerCampos(comboNivel);
 					regras.excluiFuncionario(funcionario.getLogin());
 				} catch (SQLException ex) {
 					JOptionPane.showMessageDialog(null, "Descrição do erro:\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
 				}
 
-				limparCampos(comboFuncionario);
+				limparCampos(comboFuncionario, comboNivel);
 
 			}
 		});
+
+		lblNivel = new JLabel("N\u00EDvel de Acesso ao Sistema");
+		lblNivel.setFont(new Font("Arial", Font.BOLD, 12));
 
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
 		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(
@@ -247,28 +259,25 @@ public class CadastroFuncionarios extends JFrame {
 						.addContainerGap()
 						.addGroup(
 								groupLayout
-										.createParallelGroup(Alignment.TRAILING)
-										.addGroup(groupLayout.createSequentialGroup().addComponent(lblFuncionario).addContainerGap(168, Short.MAX_VALUE))
+										.createParallelGroup(Alignment.LEADING)
+										.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup().addComponent(lblFuncionario).addContainerGap(168, Short.MAX_VALUE))
 										.addGroup(
+												Alignment.TRAILING,
 												groupLayout.createSequentialGroup().addComponent(lblNome, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
 														.addContainerGap(259, Short.MAX_VALUE))
 										.addGroup(
+												Alignment.TRAILING,
 												groupLayout.createSequentialGroup().addComponent(lblEnquadramentoFuncional, GroupLayout.PREFERRED_SIZE, 160, GroupLayout.PREFERRED_SIZE)
 														.addContainerGap(144, Short.MAX_VALUE))
 										.addGroup(
+												Alignment.TRAILING,
 												groupLayout
 														.createSequentialGroup()
 														.addGroup(
 																groupLayout
-																		.createParallelGroup(Alignment.TRAILING)
+																		.createParallelGroup(Alignment.LEADING)
+																		.addComponent(textEnquadramento_Funcional, GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
 																		.addGroup(
-																				Alignment.LEADING,
-																				groupLayout.createSequentialGroup().addComponent(btnCadastrar, GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
-																						.addGap(23).addComponent(btnAlterar, GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE).addGap(18)
-																						.addComponent(btnExcluir, GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE))
-																		.addComponent(textEnquadramento_Funcional, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
-																		.addGroup(
-																				Alignment.LEADING,
 																				groupLayout
 																						.createSequentialGroup()
 																						.addGroup(
@@ -281,10 +290,17 @@ public class CadastroFuncionarios extends JFrame {
 																										.addComponent(passwordSenha, GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
 																										.addComponent(lblSenha, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)))
 																		.addGroup(
-																				Alignment.LEADING,
 																				groupLayout.createParallelGroup(Alignment.TRAILING, false)
 																						.addComponent(comboFuncionario, Alignment.LEADING, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-																						.addComponent(textNome, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE))).addGap(8)))));
+																						.addComponent(textNome, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE))).addGap(8))
+										.addGroup(groupLayout.createSequentialGroup().addComponent(lblNivel).addContainerGap(258, Short.MAX_VALUE))
+										.addGroup(
+												groupLayout.createSequentialGroup().addComponent(btnCadastrar, GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE).addGap(23)
+														.addComponent(btnAlterar, GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE).addGap(18)
+														.addComponent(btnExcluir, GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE).addGap(8))
+										.addGroup(
+												groupLayout.createSequentialGroup().addComponent(comboNivel, GroupLayout.PREFERRED_SIZE, 169, GroupLayout.PREFERRED_SIZE)
+														.addContainerGap(135, Short.MAX_VALUE)))));
 		groupLayout
 				.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(
 						groupLayout
@@ -307,11 +323,15 @@ public class CadastroFuncionarios extends JFrame {
 								.addComponent(lblEnquadramentoFuncional)
 								.addPreferredGap(ComponentPlacement.RELATED)
 								.addComponent(textEnquadramento_Funcional, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(lblNivel)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(comboNivel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 								.addGap(18)
 								.addGroup(
 										groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(btnCadastrar, GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
 												.addComponent(btnExcluir, GroupLayout.PREFERRED_SIZE, 25, Short.MAX_VALUE).addComponent(btnAlterar, GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE))
-								.addGap(23)));
+								.addGap(16)));
 		getContentPane().setLayout(groupLayout);
 
 	}

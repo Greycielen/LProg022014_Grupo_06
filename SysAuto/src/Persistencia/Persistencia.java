@@ -19,7 +19,7 @@ public class Persistencia {
 	private String drive = "com.mysql.jdbc.Driver.jar";
 	private String caminho = "jdbc:mysql://localhost/sysauto";
 	private String usuario = "root";
-	private String senha = "";
+	private String senha = "G9@u2i0l0";
 	public Connection con;
 
 	public void conexao() throws SQLException {
@@ -188,30 +188,32 @@ public class Persistencia {
 		funcionario.setLogin(this.rs.getString("login"));
 		funcionario.setSenha(this.rs.getString("senha"));
 		funcionario.setEnquadramento_funcional(this.rs.getString("enquadramento_funcional"));
-		funcionario.setNivel_acesso(this.rs.getInt("nivel_acesso"));
+		funcionario.setNivel_acesso(this.rs.getString("nivel_acesso"));
 
 		return funcionario;
 	}
 
 	public void salvarFuncionario(ModeloFuncionario funcionario) throws SQLException {
 
-		PreparedStatement pst = this.con.prepareStatement("INSERT INTO funcionarios(login, senha, nome, enquadramento_funcional) values(?, ?, ?, ?)");
+		PreparedStatement pst = this.con.prepareStatement("INSERT INTO funcionarios(login, senha, nome, enquadramento_funcional, nivel_acesso) values(?, ?, ?, ?, ?)");
 		pst.setString(1, funcionario.getLogin());
 		pst.setString(2, funcionario.getSenha());
 		pst.setString(3, funcionario.getNome());
 		pst.setString(4, funcionario.getEnquadramento_funcional());
+		pst.setString(5, funcionario.getNivel_acesso());
 		pst.execute();
 
 	}
 
 	public void alterarFuncionario(ModeloFuncionario funcionario) throws SQLException {
 
-		PreparedStatement pst = this.con.prepareStatement("UPDATE funcionarios SET login = ? , senha = ?, nome = ?, enquadramento_funcional = ? where login = ?");
+		PreparedStatement pst = this.con.prepareStatement("UPDATE funcionarios SET login = ? , senha = ?, nome = ?, enquadramento_funcional = ?, nivel_acesso = ? where login = ?");
 		pst.setString(1, funcionario.getLogin());
 		pst.setString(2, funcionario.getSenha());
 		pst.setString(3, funcionario.getNome());
 		pst.setString(4, funcionario.getEnquadramento_funcional());
-		pst.setString(5, funcionario.getLogin());
+		pst.setString(5, funcionario.getNivel_acesso());
+		pst.setString(6, funcionario.getLogin());
 		pst.execute();
 
 	}
