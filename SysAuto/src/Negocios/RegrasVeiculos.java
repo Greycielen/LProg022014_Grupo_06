@@ -1,31 +1,39 @@
 package Negocios;
 
-import javax.swing.JComboBox;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 import Modelos.ModeloVeiculo;
 import Persistencia.Persistencia;
 
 public class RegrasVeiculos {
 	Persistencia bancodedados = new Persistencia();
 
-	public void consultaVeiculo(ModeloVeiculo veiculo) {
-		bancodedados.consultarVeiculo(veiculo);
-	}
-
-	public void preencheCombo(JComboBox<String> comboVeiculo) {
-		bancodedados.preencherComboVeiculos(comboVeiculo);
-	}
-
-	public void excluiVeiculo(ModeloVeiculo veiculo) {
+	public void conecta() throws SQLException {
 		bancodedados.conexao();
-		String placa = veiculo.getPlaca();
+	}
+
+	public void desconecta() throws SQLException {
+		bancodedados.desconexao();
+	}
+
+	public ModeloVeiculo consultaVeiculo(String placa) throws SQLException {
+		return bancodedados.consultarVeiculo(placa);
+	}
+
+	public ArrayList<String> listaVeiculos() throws SQLException {
+		return bancodedados.listarVeiculos();
+	}
+
+	public void excluiVeiculo(String placa) throws SQLException {
 		bancodedados.excluirVeiculo(placa);
 	}
 
-	public void cadastraVeiculo(ModeloVeiculo veiculo) {
+	public void cadastraVeiculo(ModeloVeiculo veiculo) throws SQLException {
 		bancodedados.salvarVeiculo(veiculo);
 	}
 
-	public void atualizaVeiculo(ModeloVeiculo veiculo) {
+	public void atualizaVeiculo(ModeloVeiculo veiculo) throws SQLException {
 		bancodedados.alterarVeiculo(veiculo);
 	}
 }

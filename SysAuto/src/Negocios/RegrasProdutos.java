@@ -1,6 +1,8 @@
 package Negocios;
 
-import javax.swing.JComboBox;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 import Modelos.ModeloProduto;
 import Persistencia.Persistencia;
 
@@ -8,23 +10,31 @@ public class RegrasProdutos {
 
 	Persistencia bancodedados = new Persistencia();
 
-	public void consultaProduto(ModeloProduto produto) {
-		bancodedados.consultarProduto(produto);
+	public void conecta() throws SQLException {
+		bancodedados.conexao();
 	}
 
-	public void preencheCombo(JComboBox<String> comboProduto) {
-		bancodedados.preencherComboProdutos(comboProduto);
+	public void desconecta() throws SQLException {
+		bancodedados.desconexao();
 	}
 
-	public void excluiProduto(ModeloProduto produto) {
-		bancodedados.excluirProduto(produto);
+	public ModeloProduto consultaProduto(String codigo) throws SQLException {
+		return bancodedados.consultarProduto(codigo);
 	}
 
-	public void cadastraProduto(ModeloProduto produto) {
+	public ArrayList<String> listaProdutos() throws SQLException {
+		return bancodedados.listarProdutos();
+	}
+
+	public void excluiProduto(String codigo) throws SQLException {
+		bancodedados.excluirProduto(codigo);
+	}
+
+	public void cadastraProduto(ModeloProduto produto) throws SQLException {
 		bancodedados.salvarProduto(produto);
 	}
 
-	public void atualizaProduto(ModeloProduto produto) {
+	public void atualizaProduto(ModeloProduto produto) throws SQLException {
 		bancodedados.alterarProduto(produto);
 	}
 

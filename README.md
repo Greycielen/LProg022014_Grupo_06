@@ -1,7 +1,5 @@
-LProg022014_Grupo_06
-====================
-
-SysAuto
+﻿LProg022014_Grupo_06				SysAuto
+=============================================================================================
 
 Instruções Para Instalação do Banco de Dados:
 
