@@ -120,7 +120,9 @@ public class CadastroVeiculos extends JFrame {
 
 			public void popupMenuWillBecomeInvisible(PopupMenuEvent arg0) {
 
-				if ((String) comboVeiculo.getSelectedItem() == "<NOVO VEICULO>") {
+				String veiculo_selecionado = (String) comboVeiculo.getSelectedItem();
+
+				if (veiculo_selecionado.equals("<NOVO VEICULO>")) {
 
 					limparCampos(comboVeiculo);
 					comboVeiculo.setSelectedItem((String) "<NOVO VEICULO>");

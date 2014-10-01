@@ -126,7 +126,9 @@ public class CadastroProdutos extends JFrame {
 
 			public void popupMenuWillBecomeInvisible(PopupMenuEvent arg0) {
 
-				if ((String) comboProduto.getSelectedItem() == "<NOVO PRODUTO>") {
+				String produto_selecionado = (String) comboProduto.getSelectedItem().toString();
+
+				if (produto_selecionado.equals("<NOVO PRODUTO>")) {
 
 					limpaCampos(comboProduto, comboEnquadramento);
 					comboProduto.setSelectedItem((String) "<NOVO PRODUTO>");

@@ -126,7 +126,7 @@ public class CadastroFuncionarios extends JFrame {
 
 				String nome_selecionado = (String) comboFuncionario.getSelectedItem().toString();
 
-				if (nome_selecionado == "<NOVO FUNCIONARIO>") {
+				if (nome_selecionado.equals("<NOVO FUNCIONARIO>")) {
 					limparCampos(comboFuncionario, comboNivel);
 					comboFuncionario.setSelectedItem((String) "<NOVO FUNCIONARIO>");
 				} else {
