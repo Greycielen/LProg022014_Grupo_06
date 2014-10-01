@@ -5,6 +5,15 @@ public class ModeloFuncionario {
 	private String enquadramento_funcional;
 	private String login;
 	private String senha;
+	private int nivel_acesso;
+
+	public int getNivel_acesso() {
+		return nivel_acesso;
+	}
+
+	public void setNivel_acesso(int nivel_acesso) {
+		this.nivel_acesso = nivel_acesso;
+	}
 
 	public String getNome() {
 		return nome;

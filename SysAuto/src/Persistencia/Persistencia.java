@@ -188,6 +188,7 @@ public class Persistencia {
 		funcionario.setLogin(this.rs.getString("login"));
 		funcionario.setSenha(this.rs.getString("senha"));
 		funcionario.setEnquadramento_funcional(this.rs.getString("enquadramento_funcional"));
+		funcionario.setNivel_acesso(this.rs.getInt("nivel_acesso"));
 
 		return funcionario;
 	}
