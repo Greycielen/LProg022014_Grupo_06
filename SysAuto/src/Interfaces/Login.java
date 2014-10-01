@@ -53,7 +53,7 @@ public class Login extends JFrame {
 			JOptionPane.showMessageDialog(null, "Descrição do erro:\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
 		}
 
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 135, 170);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -85,7 +85,9 @@ public class Login extends JFrame {
 					String nivel_acesso = funcionario.getNivel_acesso().toString().substring(0, 1);
 
 					if (senha.equals(funcionario.getSenha())) {
+
 						JOptionPane.showMessageDialog(null, "Acesso Permitido!");
+
 						if (nivel_acesso.equals("1")) {
 							Frente_de_Servico interface_operacional = new Frente_de_Servico();
 							interface_operacional.setVisible(true);
@@ -95,6 +97,7 @@ public class Login extends JFrame {
 							Administrativo interface_administrativo = new Administrativo();
 							interface_administrativo.setVisible(true);
 						}
+
 					} else {
 						JOptionPane.showMessageDialog(null, "Acesso Negado!");
 					}
