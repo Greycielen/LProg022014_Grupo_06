@@ -18,6 +18,7 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 
+import Modelos.ModeloFuncionario;
 import Negocios.RegrasFuncionarios;
 
 @SuppressWarnings("serial")
@@ -52,7 +53,7 @@ public class Login extends JFrame {
 			JOptionPane.showMessageDialog(null, "Descrição do erro:\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
 		}
 
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 135, 170);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -71,9 +72,37 @@ public class Login extends JFrame {
 
 		btnEntrar = new JButton("Entrar");
 		btnEntrar.addMouseListener(new MouseAdapter() {
+			@SuppressWarnings("deprecation")
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				// TODO
+
+				String login = textLogin.getText();
+				String senha = passwordSenha.getText();
+
+				try {
+					ModeloFuncionario funcionario = regras.consultaFuncionarioLogin(login);
+
+					String nivel_acesso = funcionario.getNivel_acesso().toString().substring(0, 1);
+
+					if (senha.equals(funcionario.getSenha())) {
+						JOptionPane.showMessageDialog(null, "Acesso Permitido!");
+						if (nivel_acesso.equals("1")) {
+							Frente_de_Servico interface_operacional = new Frente_de_Servico();
+							interface_operacional.setVisible(true);
+						}
+
+						if (nivel_acesso.equals("2")) {
+							Administrativo interface_administrativo = new Administrativo();
+							interface_administrativo.setVisible(true);
+						}
+					} else {
+						JOptionPane.showMessageDialog(null, "Acesso Negado!");
+					}
+
+				} catch (SQLException ex) {
+					JOptionPane.showMessageDialog(null, "Login incorreto", "Erro", JOptionPane.ERROR_MESSAGE);
+				}
+
 			}
 		});
 		btnEntrar.setFont(new Font("Arial", Font.BOLD, 12));

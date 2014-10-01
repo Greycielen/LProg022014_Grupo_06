@@ -22,6 +22,10 @@ public class RegrasFuncionarios {
 		return bancodedados.consultarFuncionario(nome);
 	}
 
+	public ModeloFuncionario consultaFuncionarioLogin(String login) throws SQLException {
+		return bancodedados.consultarFuncionarioLogin(login);
+	}
+
 	public ArrayList<String> listaFuncionarios() throws SQLException {
 		return bancodedados.listarFuncionarios();
 	}

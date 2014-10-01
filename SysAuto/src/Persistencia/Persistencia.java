@@ -193,6 +193,21 @@ public class Persistencia {
 		return funcionario;
 	}
 
+	public ModeloFuncionario consultarFuncionarioLogin(String login) throws SQLException {
+
+		ModeloFuncionario funcionario = new ModeloFuncionario();
+
+		this.executaSQL("SELECT * FROM funcionarios WHERE login ='" + login + "'");
+		this.rs.first();
+		funcionario.setNome(this.rs.getString("nome"));
+		funcionario.setLogin(this.rs.getString("login"));
+		funcionario.setSenha(this.rs.getString("senha"));
+		funcionario.setEnquadramento_funcional(this.rs.getString("enquadramento_funcional"));
+		funcionario.setNivel_acesso(this.rs.getString("nivel_acesso"));
+
+		return funcionario;
+	}
+
 	public void salvarFuncionario(ModeloFuncionario funcionario) throws SQLException {
 
 		PreparedStatement pst = this.con.prepareStatement("INSERT INTO funcionarios(login, senha, nome, enquadramento_funcional, nivel_acesso) values(?, ?, ?, ?, ?)");
