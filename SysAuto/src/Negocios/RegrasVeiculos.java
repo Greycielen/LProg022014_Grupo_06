@@ -14,7 +14,7 @@ public class RegrasVeiculos {
 	}
 
 	public void desconecta() throws SQLException {
-		bancodedados.desconexao();
+		bancodedados.disconnection();
 	}
 
 	public ModeloVeiculo consultaVeiculo(String placa) throws SQLException {

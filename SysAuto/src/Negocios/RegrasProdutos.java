@@ -15,7 +15,7 @@ public class RegrasProdutos {
 	}
 
 	public void desconecta() throws SQLException {
-		bancodedados.desconexao();
+		bancodedados.disconnection();
 	}
 
 	public ModeloProduto consultaProduto(String codigo) throws SQLException {

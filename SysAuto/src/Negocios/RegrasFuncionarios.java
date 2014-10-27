@@ -15,7 +15,7 @@ public class RegrasFuncionarios {
 	}
 
 	public void desconecta() throws SQLException {
-		bancodedados.desconexao();
+		bancodedados.disconnection();
 	}
 
 	public ModeloFuncionario consultaFuncionario(String nome) throws SQLException {
