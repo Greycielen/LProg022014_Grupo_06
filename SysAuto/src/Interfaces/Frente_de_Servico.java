@@ -33,7 +33,7 @@ public class Frente_de_Servico extends JFrame {
 	public Frente_de_Servico() {
 		setBackground(Color.WHITE);
 		setTitle("SysAuto - Frente de Servi\u00E7o");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 
 		JMenuBar menuBar = new JMenuBar();
@@ -43,14 +43,28 @@ public class Frente_de_Servico extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 
-		JLabel label = new JLabel("");
-		label.setIcon(new ImageIcon("C:\\Users\\Guilherme\\git\\LProg022014_Grupo_06\\SysAuto\\src\\Persistencia\\Arquivos\\Sysauto.png"));
+		JLabel labelimagem = new JLabel("");
+		labelimagem
+				.setIcon(new ImageIcon(
+						"C:\\Users\\Guilherme\\Projetos\\SysAuto\\SysAuto\\src\\Persistencia\\Arquivos\\Sysauto.png"));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(
-				gl_contentPane.createSequentialGroup().addGap(92).addComponent(label, GroupLayout.PREFERRED_SIZE, 240, GroupLayout.PREFERRED_SIZE).addContainerGap(92, Short.MAX_VALUE)));
-		gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(
-				gl_contentPane.createSequentialGroup().addContainerGap().addComponent(label, GroupLayout.PREFERRED_SIZE, 230, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(
+				Alignment.LEADING).addGroup(
+				gl_contentPane
+						.createSequentialGroup()
+						.addGap(92)
+						.addComponent(labelimagem, GroupLayout.PREFERRED_SIZE,
+								240, GroupLayout.PREFERRED_SIZE)
+						.addContainerGap(92, Short.MAX_VALUE)));
+		gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(
+				Alignment.LEADING).addGroup(
+				gl_contentPane
+						.createSequentialGroup()
+						.addContainerGap()
+						.addComponent(labelimagem, GroupLayout.PREFERRED_SIZE,
+								230, GroupLayout.PREFERRED_SIZE)
+						.addContainerGap(GroupLayout.DEFAULT_SIZE,
+								Short.MAX_VALUE)));
 		contentPane.setLayout(gl_contentPane);
 	}
 

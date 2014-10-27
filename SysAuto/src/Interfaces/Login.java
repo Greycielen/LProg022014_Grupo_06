@@ -2,6 +2,8 @@ package Interfaces;
 
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
@@ -38,7 +40,9 @@ public class Login extends JFrame {
 					Login frame = new Login();
 					frame.setVisible(true);
 				} catch (Exception ex) {
-					JOptionPane.showMessageDialog(null, "Descrição do erro:\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Descrição do erro:\n"
+							+ ex.getMessage(), "Erro",
+							JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -50,7 +54,9 @@ public class Login extends JFrame {
 		try {
 			regras.conecta();
 		} catch (SQLException ex) {
-			JOptionPane.showMessageDialog(null, "Descrição do erro:\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null,
+					"Descrição do erro:\n" + ex.getMessage(), "Erro",
+					JOptionPane.ERROR_MESSAGE);
 		}
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -69,55 +75,96 @@ public class Login extends JFrame {
 		lblSenha.setFont(new Font("Arial", Font.BOLD, 12));
 
 		passwordSenha = new JPasswordField();
+		passwordSenha.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				login();
+
+			}
+		});
 
 		btnEntrar = new JButton("Entrar");
 		btnEntrar.addMouseListener(new MouseAdapter() {
-			@SuppressWarnings("deprecation")
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 
-				String login = textLogin.getText();
-				String senha = passwordSenha.getText();
-
-				try {
-					ModeloFuncionario funcionario = regras.consultaFuncionarioLogin(login);
-
-					String nivel_acesso = funcionario.getNivel_acesso().toString().substring(0, 1);
-
-					if (senha.equals(funcionario.getSenha())) {
-
-						JOptionPane.showMessageDialog(null, "Acesso Permitido!");
-
-						if (nivel_acesso.equals("1")) {
-							Frente_de_Servico interface_operacional = new Frente_de_Servico();
-							interface_operacional.setVisible(true);
-						}
-
-						if (nivel_acesso.equals("2")) {
-							Administrativo interface_administrativo = new Administrativo();
-							interface_administrativo.setVisible(true);
-						}
-
-					} else {
-						JOptionPane.showMessageDialog(null, "Acesso Negado!");
-					}
-
-				} catch (SQLException ex) {
-					JOptionPane.showMessageDialog(null, "Login incorreto", "Erro", JOptionPane.ERROR_MESSAGE);
-				}
+				login();
 
 			}
 		});
 		btnEntrar.setFont(new Font("Arial", Font.BOLD, 12));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addComponent(lblLogin)
-				.addComponent(textLogin, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE).addComponent(lblSenha)
-				.addComponent(passwordSenha, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE).addGroup(gl_contentPane.createSequentialGroup().addGap(27).addComponent(btnEntrar)));
-		gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(
-				gl_contentPane.createSequentialGroup().addComponent(lblLogin).addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(textLogin, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE).addPreferredGap(ComponentPlacement.RELATED).addComponent(lblSenha)
-						.addPreferredGap(ComponentPlacement.RELATED).addComponent(passwordSenha, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.UNRELATED).addComponent(btnEntrar).addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+		gl_contentPane.setHorizontalGroup(gl_contentPane
+				.createParallelGroup(Alignment.LEADING)
+				.addComponent(lblLogin)
+				.addComponent(textLogin, GroupLayout.PREFERRED_SIZE, 120,
+						GroupLayout.PREFERRED_SIZE)
+				.addComponent(lblSenha)
+				.addComponent(passwordSenha, GroupLayout.PREFERRED_SIZE, 120,
+						GroupLayout.PREFERRED_SIZE)
+				.addGroup(
+						gl_contentPane.createSequentialGroup().addGap(27)
+								.addComponent(btnEntrar)));
+		gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(
+				Alignment.LEADING).addGroup(
+				gl_contentPane
+						.createSequentialGroup()
+						.addComponent(lblLogin)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(textLogin, GroupLayout.PREFERRED_SIZE,
+								GroupLayout.DEFAULT_SIZE,
+								GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(lblSenha)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(passwordSenha,
+								GroupLayout.PREFERRED_SIZE,
+								GroupLayout.DEFAULT_SIZE,
+								GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.UNRELATED)
+						.addComponent(btnEntrar)
+						.addContainerGap(GroupLayout.DEFAULT_SIZE,
+								Short.MAX_VALUE)));
 		contentPane.setLayout(gl_contentPane);
+	}
+
+	private void login() {
+
+		String login = textLogin.getText();
+		String senha = passwordSenha.getText();
+
+		try {
+
+			ModeloFuncionario funcionario = regras
+					.consultaFuncionarioLogin(login);
+
+			String nivel_acesso = funcionario.getNivel_acesso().toString()
+					.substring(0, 1);
+
+			textLogin.setText(null);
+			passwordSenha.setText(null);
+
+			if (senha.equals(funcionario.getSenha())) {
+
+				if (nivel_acesso.equals("1")) {
+					Frente_de_Servico interface_operacional = new Frente_de_Servico();
+					interface_operacional.setVisible(true);
+				}
+
+				if (nivel_acesso.equals("2")) {
+					Administrativo interface_administrativo = new Administrativo();
+					interface_administrativo.setVisible(true);
+				}
+
+			} else {
+
+				JOptionPane.showMessageDialog(null, "Acesso Negado!");
+
+			}
+
+		} catch (SQLException ex) {
+			JOptionPane.showMessageDialog(null, "Login incorreto", "Erro",
+					JOptionPane.ERROR_MESSAGE);
+		}
 	}
 }
