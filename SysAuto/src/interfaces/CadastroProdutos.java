@@ -1,4 +1,4 @@
-package Interfaces;
+package interfaces;
 
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -22,8 +22,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 
+import modelos.ModeloProduto;
 import negocios.RegrasProdutos;
-import Modelos.ModeloProduto;
 
 @SuppressWarnings("serial")
 public class CadastroProdutos extends JFrame {

@@ -1,4 +1,4 @@
-package Interfaces;
+package interfaces;
 
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -21,8 +21,8 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 
+import modelos.ModeloFuncionario;
 import negocios.RegrasFuncionarios;
-import Modelos.ModeloFuncionario;
 
 @SuppressWarnings("serial")
 public class CadastroFuncionarios extends JFrame {

@@ -3,8 +3,8 @@ package negocios;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import modelos.ModeloProduto;
 import persistencia.Persistance_DB;
-import Modelos.ModeloProduto;
 
 public class RegrasProdutos {
 

@@ -3,8 +3,8 @@ package negocios;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import modelos.ModeloVeiculo;
 import persistencia.Persistance_DB;
-import Modelos.ModeloVeiculo;
 
 public class RegrasVeiculos {
 	Persistencia_DB bancodedados = new Persistencia_DB();

@@ -1,4 +1,4 @@
-package Interfaces;
+package interfaces;
 
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -20,8 +20,8 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 
+import modelos.ModeloFuncionario;
 import negocios.RegrasFuncionarios;
-import Modelos.ModeloFuncionario;
 
 @SuppressWarnings("serial")
 public class Login extends JFrame {

@@ -8,9 +8,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import Modelos.ModeloFuncionario;
-import Modelos.ModeloProduto;
-import Modelos.ModeloVeiculo;
+import modelos.ModeloFuncionario;
+import modelos.ModeloProduto;
+import modelos.ModeloVeiculo;
 
 public class Persistencia_DB {
 

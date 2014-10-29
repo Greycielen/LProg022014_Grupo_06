@@ -3,8 +3,8 @@ package negocios;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import modelos.ModeloFuncionario;
 import persistencia.Persistance_DB;
-import Modelos.ModeloFuncionario;
 
 public class RegrasFuncionarios {
 
