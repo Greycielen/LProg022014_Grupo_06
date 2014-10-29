@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import modelos.ModeloProduto;
-import persistencia.Persistance_DB;
+import persistencia.Persistencia_DB;
 
 public class RegrasProdutos {
 

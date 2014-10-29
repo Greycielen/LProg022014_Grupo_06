@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import modelos.ModeloVeiculo;
-import persistencia.Persistance_DB;
+import persistencia.Persistencia_DB;
 
 public class RegrasVeiculos {
 	Persistencia_DB bancodedados = new Persistencia_DB();

@@ -102,7 +102,8 @@ public class Administrativo extends JFrame {
 		JMenuItem mntmConfigurarServidor = new JMenuItem("Configurar Servidor");
 		mntmConfigurarServidor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO
+				configurarServidor configuracao = new configurarServidor();
+				configuracao.setVisible(true);
 			}
 		});
 		mnFerramentas.add(mntmConfigurarServidor);
