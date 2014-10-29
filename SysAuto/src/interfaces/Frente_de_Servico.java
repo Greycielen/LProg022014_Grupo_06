@@ -2,12 +2,15 @@ package interfaces;
 
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -38,6 +41,21 @@ public class Frente_de_Servico extends JFrame {
 
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
+
+		JMenu mnServios = new JMenu("Servi\u00E7os");
+		menuBar.add(mnServios);
+
+		JMenu mnRelatorios = new JMenu("Relatorios");
+		menuBar.add(mnRelatorios);
+
+		JMenu mnSair = new JMenu("Sair");
+		mnSair.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				setVisible(false);
+			}
+		});
+		menuBar.add(mnSair);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

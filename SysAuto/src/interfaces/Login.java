@@ -32,6 +32,8 @@ public class Login extends JFrame {
 	private JTextField textLogin;
 	private JPasswordField passwordSenha;
 	private JButton btnEntrar;
+	private JButton btnSair;
+	private JPanel panel;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -49,6 +51,7 @@ public class Login extends JFrame {
 	}
 
 	public Login() {
+		setTitle("Login SysAuto");
 		setResizable(false);
 
 		try {
@@ -60,7 +63,7 @@ public class Login extends JFrame {
 		}
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 135, 170);
+		setBounds(100, 100, 220, 130);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -83,54 +86,139 @@ public class Login extends JFrame {
 			}
 		});
 
+		panel = new JPanel();
+		GroupLayout gl_contentPane = new GroupLayout(contentPane);
+		gl_contentPane
+				.setHorizontalGroup(gl_contentPane
+						.createParallelGroup(Alignment.LEADING)
+						.addGroup(
+								gl_contentPane
+										.createSequentialGroup()
+										.addGap(0)
+										.addGroup(
+												gl_contentPane
+														.createParallelGroup(
+																Alignment.LEADING)
+														.addGroup(
+																gl_contentPane
+																		.createSequentialGroup()
+																		.addComponent(
+																				lblLogin)
+																		.addContainerGap())
+														.addGroup(
+																gl_contentPane
+																		.createSequentialGroup()
+																		.addGroup(
+																				gl_contentPane
+																						.createParallelGroup(
+																								Alignment.LEADING)
+																						.addGroup(
+																								gl_contentPane
+																										.createSequentialGroup()
+																										.addComponent(
+																												textLogin,
+																												GroupLayout.DEFAULT_SIZE,
+																												114,
+																												Short.MAX_VALUE)
+																										.addPreferredGap(
+																												ComponentPlacement.RELATED))
+																						.addGroup(
+																								gl_contentPane
+																										.createSequentialGroup()
+																										.addComponent(
+																												lblSenha)
+																										.addPreferredGap(
+																												ComponentPlacement.RELATED))
+																						.addGroup(
+																								gl_contentPane
+																										.createSequentialGroup()
+																										.addComponent(
+																												passwordSenha,
+																												GroupLayout.DEFAULT_SIZE,
+																												36,
+																												Short.MAX_VALUE)
+																										.addPreferredGap(
+																												ComponentPlacement.RELATED)))
+																		.addPreferredGap(
+																				ComponentPlacement.RELATED)
+																		.addComponent(
+																				panel,
+																				GroupLayout.PREFERRED_SIZE,
+																				81,
+																				GroupLayout.PREFERRED_SIZE)
+																		.addGap(3)))));
+		gl_contentPane
+				.setVerticalGroup(gl_contentPane
+						.createParallelGroup(Alignment.TRAILING)
+						.addGroup(
+								gl_contentPane
+										.createSequentialGroup()
+										.addGroup(
+												gl_contentPane
+														.createParallelGroup(
+																Alignment.TRAILING)
+														.addGroup(
+																gl_contentPane
+																		.createSequentialGroup()
+																		.addContainerGap()
+																		.addComponent(
+																				panel,
+																				GroupLayout.PREFERRED_SIZE,
+																				66,
+																				GroupLayout.PREFERRED_SIZE))
+														.addGroup(
+																gl_contentPane
+																		.createSequentialGroup()
+																		.addComponent(
+																				lblLogin)
+																		.addPreferredGap(
+																				ComponentPlacement.RELATED,
+																				GroupLayout.DEFAULT_SIZE,
+																				Short.MAX_VALUE)
+																		.addComponent(
+																				textLogin,
+																				GroupLayout.PREFERRED_SIZE,
+																				GroupLayout.DEFAULT_SIZE,
+																				GroupLayout.PREFERRED_SIZE)
+																		.addPreferredGap(
+																				ComponentPlacement.RELATED)
+																		.addComponent(
+																				lblSenha)
+																		.addPreferredGap(
+																				ComponentPlacement.RELATED)
+																		.addComponent(
+																				passwordSenha,
+																				GroupLayout.PREFERRED_SIZE,
+																				GroupLayout.DEFAULT_SIZE,
+																				GroupLayout.PREFERRED_SIZE)))
+										.addGap(20)));
+
+		btnSair = new JButton("Sair");
+		btnSair.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				setVisible(false);
+			}
+		});
+		panel.add(btnSair);
+		btnSair.setFont(new Font("Arial", Font.BOLD, 12));
+
 		btnEntrar = new JButton("Entrar");
+		panel.add(btnEntrar);
 		btnEntrar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-
 				login();
-
 			}
 		});
 		btnEntrar.setFont(new Font("Arial", Font.BOLD, 12));
-		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(gl_contentPane
-				.createParallelGroup(Alignment.LEADING)
-				.addComponent(lblLogin)
-				.addComponent(textLogin, GroupLayout.PREFERRED_SIZE, 120,
-						GroupLayout.PREFERRED_SIZE)
-				.addComponent(lblSenha)
-				.addComponent(passwordSenha, GroupLayout.PREFERRED_SIZE, 120,
-						GroupLayout.PREFERRED_SIZE)
-				.addGroup(
-						gl_contentPane.createSequentialGroup().addGap(27)
-								.addComponent(btnEntrar)));
-		gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(
-				Alignment.LEADING).addGroup(
-				gl_contentPane
-						.createSequentialGroup()
-						.addComponent(lblLogin)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(textLogin, GroupLayout.PREFERRED_SIZE,
-								GroupLayout.DEFAULT_SIZE,
-								GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(lblSenha)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(passwordSenha,
-								GroupLayout.PREFERRED_SIZE,
-								GroupLayout.DEFAULT_SIZE,
-								GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.UNRELATED)
-						.addComponent(btnEntrar)
-						.addContainerGap(GroupLayout.DEFAULT_SIZE,
-								Short.MAX_VALUE)));
 		contentPane.setLayout(gl_contentPane);
 	}
 
 	private void login() {
 
 		String login = textLogin.getText();
+		@SuppressWarnings("deprecation")
 		String senha = passwordSenha.getText();
 
 		try {

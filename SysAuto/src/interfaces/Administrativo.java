@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -102,7 +104,7 @@ public class Administrativo extends JFrame {
 		JMenuItem mntmConfigurarServidor = new JMenuItem("Configurar Servidor");
 		mntmConfigurarServidor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				configurarServidor configuracao = new configurarServidor();
+				ConfigurarServidor configuracao = new ConfigurarServidor();
 				configuracao.setVisible(true);
 			}
 		});
@@ -126,6 +128,16 @@ public class Administrativo extends JFrame {
 			}
 		});
 		mnBackup.add(mntmRestaurar);
+
+		JMenu mnSair = new JMenu("Sair");
+		mnSair.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				setVisible(false);
+			}
+		});
+
+		menuBar.add(mnSair);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
