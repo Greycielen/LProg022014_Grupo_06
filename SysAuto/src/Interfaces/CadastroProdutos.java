@@ -22,8 +22,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 
+import negocios.RegrasProdutos;
 import Modelos.ModeloProduto;
-import Negocios.RegrasProdutos;
 
 @SuppressWarnings("serial")
 public class CadastroProdutos extends JFrame {

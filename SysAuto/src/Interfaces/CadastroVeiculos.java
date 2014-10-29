@@ -22,8 +22,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 
+import negocios.RegrasVeiculos;
 import Modelos.ModeloVeiculo;
-import Negocios.RegrasVeiculos;
 
 @SuppressWarnings("serial")
 public class CadastroVeiculos extends JFrame {

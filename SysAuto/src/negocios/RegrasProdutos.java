@@ -1,14 +1,14 @@
-package Negocios;
+package negocios;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import persistencia.Persistance_DB;
 import Modelos.ModeloProduto;
-import Persistencia.Persistencia;
 
 public class RegrasProdutos {
 
-	Persistencia bancodedados = new Persistencia();
+	Persistencia_DB bancodedados = new Persistencia_DB();
 
 	public void conecta() throws SQLException {
 		bancodedados.conexao();

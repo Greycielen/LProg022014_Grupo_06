@@ -21,8 +21,8 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 
+import negocios.RegrasFuncionarios;
 import Modelos.ModeloFuncionario;
-import Negocios.RegrasFuncionarios;
 
 @SuppressWarnings("serial")
 public class CadastroFuncionarios extends JFrame {
