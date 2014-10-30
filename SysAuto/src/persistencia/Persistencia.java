@@ -104,8 +104,6 @@ public class Persistencia {
 
 		endereco = endereco_inicio + IP + endereco_fim;
 
-		System.out.println(endereco);
-
 		System.setProperty("jdbc.Drivers", drive);
 		con = DriverManager.getConnection(endereco, usuario, senha);
 

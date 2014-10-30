@@ -34,23 +34,13 @@ public class Login extends JFrame {
 	private JTextField textLogin;
 	private JPasswordField passwordSenha;
 	private JButton btnEntrar;
-	private JButton btnSair;
-	private JPanel panel;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 
-				try {
-
-					Login frame = new Login();
-					frame.setVisible(true);
-
-				} catch (Exception ex) {
-
-					JOptionPane.showMessageDialog(null, "Descrição do erro:\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-
-				}
+				Login frame = new Login();
+				frame.setVisible(true);
 
 			}
 
@@ -82,101 +72,90 @@ public class Login extends JFrame {
 
 		passwordSenha = new JPasswordField();
 		passwordSenha.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 
+				conexao();
 				login();
 
 			}
 
 		});
 
-		panel = new JPanel();
+		btnEntrar = new JButton("Entrar");
+		btnEntrar.setFont(new Font("Arial", Font.BOLD, 12));
+		btnEntrar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+
+				conexao();
+				login();
+
+			}
+
+		});
+
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane
-				.setHorizontalGroup(gl_contentPane
-						.createParallelGroup(Alignment.LEADING)
+		contentPane.setLayout(gl_contentPane);
+		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(
+				gl_contentPane
+						.createSequentialGroup()
+						.addGap(0)
 						.addGroup(
 								gl_contentPane
-										.createSequentialGroup()
-										.addGap(0)
+										.createParallelGroup(Alignment.LEADING)
+										.addComponent(lblSenha)
 										.addGroup(
 												gl_contentPane
-														.createParallelGroup(Alignment.LEADING)
-														.addGroup(gl_contentPane.createSequentialGroup().addComponent(lblLogin).addContainerGap())
+														.createParallelGroup(Alignment.TRAILING)
+														.addGroup(gl_contentPane.createSequentialGroup().addComponent(lblLogin).addGap(96))
 														.addGroup(
 																gl_contentPane
 																		.createSequentialGroup()
 																		.addGroup(
 																				gl_contentPane
-																						.createParallelGroup(Alignment.LEADING)
-																						.addGroup(
-																								gl_contentPane
-																										.createSequentialGroup()
-																										.addComponent(textLogin,
-																												GroupLayout.DEFAULT_SIZE, 114,
-																												Short.MAX_VALUE)
-																										.addPreferredGap(ComponentPlacement.RELATED))
-																						.addGroup(
-																								gl_contentPane.createSequentialGroup()
-																										.addComponent(lblSenha)
-																										.addPreferredGap(ComponentPlacement.RELATED))
-																						.addGroup(
-																								gl_contentPane
-																										.createSequentialGroup()
-																										.addComponent(passwordSenha,
-																												GroupLayout.DEFAULT_SIZE, 36,
-																												Short.MAX_VALUE)
-																										.addPreferredGap(ComponentPlacement.RELATED)))
-																		.addPreferredGap(ComponentPlacement.RELATED)
-																		.addComponent(panel, GroupLayout.PREFERRED_SIZE, 81,
-																				GroupLayout.PREFERRED_SIZE).addGap(3)))));
+																						.createParallelGroup(Alignment.TRAILING)
+																						.addComponent(passwordSenha, Alignment.LEADING,
+																								GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
+																						.addComponent(textLogin, GroupLayout.DEFAULT_SIZE, 117,
+																								Short.MAX_VALUE))
+																		.addPreferredGap(ComponentPlacement.UNRELATED))))
+						.addPreferredGap(ComponentPlacement.UNRELATED).addComponent(btnEntrar).addGap(8)));
 		gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING).addGroup(
 				gl_contentPane
 						.createSequentialGroup()
+						.addComponent(lblLogin)
+						.addPreferredGap(ComponentPlacement.RELATED)
 						.addGroup(
 								gl_contentPane
-										.createParallelGroup(Alignment.TRAILING)
+										.createParallelGroup(Alignment.LEADING, false)
+										.addComponent(btnEntrar, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
+												Short.MAX_VALUE)
 										.addGroup(
-												gl_contentPane.createSequentialGroup().addContainerGap()
-														.addComponent(panel, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE))
-										.addGroup(
+												Alignment.TRAILING,
 												gl_contentPane
 														.createSequentialGroup()
-														.addComponent(lblLogin)
-														.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 														.addComponent(textLogin, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
 																GroupLayout.PREFERRED_SIZE)
 														.addPreferredGap(ComponentPlacement.RELATED)
 														.addComponent(lblSenha)
 														.addPreferredGap(ComponentPlacement.RELATED)
 														.addComponent(passwordSenha, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-																GroupLayout.PREFERRED_SIZE))).addGap(20)));
+																GroupLayout.PREFERRED_SIZE))).addGap(38)));
 
-		btnSair = new JButton("Sair");
-		btnSair.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				setVisible(false);
-			}
-		});
-		panel.add(btnSair);
-		btnSair.setFont(new Font("Arial", Font.BOLD, 12));
-
-		btnEntrar = new JButton("Entrar");
-		panel.add(btnEntrar);
-		btnEntrar.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-
-				login();
-
-			}
-		});
-		btnEntrar.setFont(new Font("Arial", Font.BOLD, 12));
-		contentPane.setLayout(gl_contentPane);
 	}
 
 	private void conexao() {
+
+		File diretorio = new File("C:\\SysAuto");
+
+		if (!diretorio.exists()) {
+
+			JOptionPane.showMessageDialog(null, "Antes de fazer login é necessário que,\n você configure seu servidor de banco de dados.");
+			ConfigurarServidor configuracao = new ConfigurarServidor();
+			configuracao.setVisible(true);
+
+		}
 
 		try {
 
@@ -187,18 +166,6 @@ public class Login extends JFrame {
 			JOptionPane.showMessageDialog(null, "Descrição do erro:\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
 
 		} catch (IOException ex) {
-
-			File diretorio = new File("C:\\SysAuto");
-			File arquivo = new File(diretorio, "server.conf");
-
-			if (!diretorio.exists()) {
-				if (!arquivo.exists()) {
-
-					ConfigurarServidor configuracao = new ConfigurarServidor();
-					configuracao.setVisible(true);
-
-				}
-			}
 
 		}
 

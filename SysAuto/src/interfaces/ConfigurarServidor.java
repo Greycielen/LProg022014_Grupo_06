@@ -67,11 +67,13 @@ public class ConfigurarServidor extends JFrame {
 
 		passwordSenha = new JPasswordField();
 
-		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.addMouseListener(new MouseAdapter() {
+		JButton btnTestar = new JButton("Testar");
+		btnTestar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				setVisible(false);
+				
+				
+				
 			}
 		});
 
@@ -141,7 +143,7 @@ public class ConfigurarServidor extends JFrame {
 														gl_contentPane
 																.createSequentialGroup()
 																.addGap(18)
-																.addComponent(btnCancelar, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
+																.addComponent(btnTestar, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
 																		Short.MAX_VALUE))))
 				.addComponent(textIP, GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE));
 		gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -161,7 +163,7 @@ public class ConfigurarServidor extends JFrame {
 														GroupLayout.PREFERRED_SIZE)
 												.addComponent(passwordSenha, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
 														GroupLayout.PREFERRED_SIZE)).addGap(18)
-								.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE).addComponent(btnCancelar).addComponent(btnSalvar))
+								.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE).addComponent(btnTestar).addComponent(btnSalvar))
 								.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 		contentPane.setLayout(gl_contentPane);
 	}

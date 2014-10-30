@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -27,13 +28,20 @@ public class Administrativo extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					
 					Administrativo frame = new Administrativo();
 					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
+				
+				} catch (Exception ex) {
+				
+					JOptionPane.showMessageDialog(null, "Descrição do erro:\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+				
 				}
+			
 			}
+		
 		});
+	
 	}
 
 	public Administrativo() {
