@@ -89,7 +89,7 @@ public class ConfigurarServidor extends JFrame {
 
 				try {
 
-					configuracao.criaConfiguracao(IP, usuario, senha);
+					configuracao.criarConfiguracao(IP, usuario, senha);
 
 				} catch (IOException ex) {
 

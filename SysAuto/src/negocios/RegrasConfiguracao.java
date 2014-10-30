@@ -10,7 +10,7 @@ public class RegrasConfiguracao {
 
 		Persistencia configuracao = new Persistencia();
 
-		configuracao.criaConfiguracao(IP, usuario, senha);
+		configuracao.criarConfiguracao(IP, usuario, senha);
 
 	}
 

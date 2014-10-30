@@ -14,8 +14,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import javax.swing.JOptionPane;
-
 import modelos.ModeloFuncionario;
 import modelos.ModeloProduto;
 import modelos.ModeloVeiculo;
@@ -27,7 +25,7 @@ public class Persistencia {
 	private String drive = "com.mysql.jdbc.Driver.jar";
 	public Connection con;
 
-	public void lerConfiguracao() throws IOException {
+	public ArrayList<String> lerConfiguracao() throws IOException {
 
 		File diretorio = new File("C:\\SysAuto");
 		File arquivo = new File(diretorio, "server.conf");
@@ -37,19 +35,22 @@ public class Persistencia {
 
 		ArrayList<String> config = new ArrayList<String>();
 
-		while (reader.readLine() != null) {
+		String linha = null;
 
-			config.add(reader.readLine());
-			JOptionPane.showMessageDialog(null, config);
+		while ((linha = reader.readLine()) != null) {
+
+			config.add(linha);
 
 		}
 
 		fileReader.close();
 		reader.close();
 
+		return config;
+
 	}
 
-	public void criaConfiguracao(String IP, String usuario, String senha) throws IOException {
+	public void criarConfiguracao(String IP, String usuario, String senha) throws IOException {
 
 		File diretorio = new File("C:\\SysAuto");
 		File arquivo = new File(diretorio, "server.conf");
@@ -59,7 +60,9 @@ public class Persistencia {
 			diretorio.mkdir();
 
 			if (!arquivo.exists()) {
+
 				arquivo.createNewFile();
+
 			}
 
 		} else {
@@ -93,9 +96,15 @@ public class Persistencia {
 		String usuario = null;
 		String senha = null;
 
-		this.lerConfiguracao();
+		ArrayList<String> config_dados = lerConfiguracao();
+
+		IP = config_dados.get(0);
+		usuario = config_dados.get(1);
+		senha = config_dados.get(2);
 
 		endereco = endereco_inicio + IP + endereco_fim;
+
+		System.out.println(endereco);
 
 		System.setProperty("jdbc.Drivers", drive);
 		con = DriverManager.getConnection(endereco, usuario, senha);

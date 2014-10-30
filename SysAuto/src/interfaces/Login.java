@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -59,22 +60,10 @@ public class Login extends JFrame {
 
 	public Login() {
 
+		conexao();
+
 		setTitle("Login SysAuto");
 		setResizable(false);
-
-		try {
-
-			regras.conecta();
-
-		} catch (SQLException ex) {
-
-			JOptionPane.showMessageDialog(null, "Descrição do erro:\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-
-		} catch (IOException ex) {
-
-			JOptionPane.showMessageDialog(null, "Descrição do erro:\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-
-		}
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 220, 130);
@@ -94,6 +83,8 @@ public class Login extends JFrame {
 		passwordSenha = new JPasswordField();
 		passwordSenha.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
+				login();
 
 			}
 
@@ -176,11 +167,41 @@ public class Login extends JFrame {
 		btnEntrar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+
 				login();
+
 			}
 		});
 		btnEntrar.setFont(new Font("Arial", Font.BOLD, 12));
 		contentPane.setLayout(gl_contentPane);
+	}
+
+	private void conexao() {
+
+		try {
+
+			regras.conecta();
+
+		} catch (SQLException ex) {
+
+			JOptionPane.showMessageDialog(null, "Descrição do erro:\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+
+		} catch (IOException ex) {
+
+			File diretorio = new File("C:\\SysAuto");
+			File arquivo = new File(diretorio, "server.conf");
+
+			if (!diretorio.exists()) {
+				if (!arquivo.exists()) {
+
+					ConfigurarServidor configuracao = new ConfigurarServidor();
+					configuracao.setVisible(true);
+
+				}
+			}
+
+		}
+
 	}
 
 	private void login() {
