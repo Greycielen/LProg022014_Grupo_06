@@ -44,8 +44,8 @@ public class CadastroProdutos extends JFrame {
 				try {
 					CadastroProdutos frame = new CadastroProdutos();
 					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
+				} catch (Exception ex) {
+					JOptionPane.showMessageDialog(null, "Descrição do erro:\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});

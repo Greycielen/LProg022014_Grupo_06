@@ -1,6 +1,5 @@
 package negocios;
 
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -11,7 +10,7 @@ public class RegrasFuncionarios {
 
 	Persistencia bancodedados = new Persistencia();
 
-	public void conecta() throws SQLException, IOException {
+	public void conecta() throws SQLException {
 		bancodedados.conexao();
 	}
 

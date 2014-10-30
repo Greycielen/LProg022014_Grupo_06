@@ -28,20 +28,20 @@ public class Administrativo extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					
+
 					Administrativo frame = new Administrativo();
 					frame.setVisible(true);
-				
+
 				} catch (Exception ex) {
-				
+
 					JOptionPane.showMessageDialog(null, "Descrição do erro:\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-				
+
 				}
-			
+
 			}
-		
+
 		});
-	
+
 	}
 
 	public Administrativo() {
@@ -103,37 +103,6 @@ public class Administrativo extends JFrame {
 			}
 		});
 		mnRelatorios.add(mntmRelatorioDeSaida);
-
-		JMenu mnFerramentas = new JMenu("Ferramentas");
-		menuBar.add(mnFerramentas);
-
-		JMenuItem mntmConfigurarServidor = new JMenuItem("Configurar Servidor");
-		mntmConfigurarServidor.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				ConfigurarServidor configuracao = new ConfigurarServidor();
-				configuracao.setVisible(true);
-			}
-		});
-		mnFerramentas.add(mntmConfigurarServidor);
-
-		JMenu mnBackup = new JMenu("Backup");
-		mnFerramentas.add(mnBackup);
-
-		JMenuItem mntmCriar = new JMenuItem("Criar");
-		mntmCriar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				// TODO
-			}
-		});
-		mnBackup.add(mntmCriar);
-
-		JMenuItem mntmRestaurar = new JMenuItem("Restaurar");
-		mntmRestaurar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				// TODO
-			}
-		});
-		mnBackup.add(mntmRestaurar);
 
 		JMenu mnSair = new JMenu("Sair");
 		mnSair.addMouseListener(new MouseAdapter() {

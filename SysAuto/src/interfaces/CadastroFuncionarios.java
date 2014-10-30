@@ -6,7 +6,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.IOException;
 import java.sql.SQLException;
 
 import javax.swing.GroupLayout;
@@ -144,8 +143,6 @@ public class CadastroFuncionarios extends JFrame {
 		try {
 			regras.conecta();
 		} catch (SQLException ex) {
-			JOptionPane.showMessageDialog(null, "Descrição do erro:\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-		} catch (IOException ex) {
 			JOptionPane.showMessageDialog(null, "Descrição do erro:\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
 		}
 

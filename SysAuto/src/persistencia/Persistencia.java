@@ -1,11 +1,5 @@
 package persistencia;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -23,86 +17,12 @@ public class Persistencia {
 	public Statement stm;
 	public ResultSet rs;
 	private String drive = "com.mysql.jdbc.Driver.jar";
+	private String endereco = "jdbc:mysql://127.0.0.1/sysautodb";
+	private String usuario = "root";
+	private String senha = "91778790";
 	public Connection con;
 
-	public ArrayList<String> lerConfiguracao() throws IOException {
-
-		File diretorio = new File("C:\\SysAuto");
-		File arquivo = new File(diretorio, "server.conf");
-
-		FileReader fileReader = new FileReader(arquivo);
-		BufferedReader reader = new BufferedReader(fileReader);
-
-		ArrayList<String> config = new ArrayList<String>();
-
-		String linha = null;
-
-		while ((linha = reader.readLine()) != null) {
-
-			config.add(linha);
-
-		}
-
-		fileReader.close();
-		reader.close();
-
-		return config;
-
-	}
-
-	public void criarConfiguracao(String IP, String usuario, String senha) throws IOException {
-
-		File diretorio = new File("C:\\SysAuto");
-		File arquivo = new File(diretorio, "server.conf");
-
-		if (!diretorio.exists()) {
-
-			diretorio.mkdir();
-
-			if (!arquivo.exists()) {
-
-				arquivo.createNewFile();
-
-			}
-
-		} else {
-
-			if (!arquivo.exists()) {
-
-				arquivo.createNewFile();
-
-			}
-
-		}
-
-		FileWriter filewriter = new FileWriter(arquivo, false);
-		PrintWriter printwriter = new PrintWriter(filewriter);
-
-		printwriter.println(IP);
-		printwriter.println(usuario);
-		printwriter.println(senha);
-
-		printwriter.flush();
-		printwriter.close();
-
-	}
-
-	public void conexao() throws SQLException, IOException {
-
-		String endereco_inicio = "jdbc:mysql://";
-		String endereco_fim = "/sysautodb";
-		String endereco = null;
-		String IP = null;
-		String usuario = null;
-		String senha = null;
-
-		ArrayList<String> config_dados = lerConfiguracao();
-
-		IP = config_dados.get(0);
-		usuario = config_dados.get(1);
-		senha = config_dados.get(2);
-
-		endereco = endereco_inicio + IP + endereco_fim;
+	public void conexao() throws SQLException {
 
 		System.setProperty("jdbc.Drivers", drive);
 		con = DriverManager.getConnection(endereco, usuario, senha);

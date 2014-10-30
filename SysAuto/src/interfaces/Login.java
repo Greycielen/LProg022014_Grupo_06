@@ -6,8 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.File;
-import java.io.IOException;
 import java.sql.SQLException;
 
 import javax.swing.GroupLayout;
@@ -50,7 +48,13 @@ public class Login extends JFrame {
 
 	public Login() {
 
-		conexao();
+		try {
+
+			regras.conecta();
+
+		} catch (SQLException ex) {
+			JOptionPane.showMessageDialog(null, "Descrição do erro:\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+		}
 
 		setTitle("Login SysAuto");
 		setResizable(false);
@@ -75,7 +79,6 @@ public class Login extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				conexao();
 				login();
 
 			}
@@ -88,7 +91,6 @@ public class Login extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 
-				conexao();
 				login();
 
 			}
@@ -142,32 +144,6 @@ public class Login extends JFrame {
 														.addPreferredGap(ComponentPlacement.RELATED)
 														.addComponent(passwordSenha, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
 																GroupLayout.PREFERRED_SIZE))).addGap(38)));
-
-	}
-
-	private void conexao() {
-
-		File diretorio = new File("C:\\SysAuto");
-
-		if (!diretorio.exists()) {
-
-			JOptionPane.showMessageDialog(null, "Antes de fazer login é necessário que,\n você configure seu servidor de banco de dados.");
-			ConfigurarServidor configuracao = new ConfigurarServidor();
-			configuracao.setVisible(true);
-
-		}
-
-		try {
-
-			regras.conecta();
-
-		} catch (SQLException ex) {
-
-			JOptionPane.showMessageDialog(null, "Descrição do erro:\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-
-		} catch (IOException ex) {
-
-		}
 
 	}
 
