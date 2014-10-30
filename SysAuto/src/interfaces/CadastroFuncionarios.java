@@ -6,6 +6,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
 import java.sql.SQLException;
 
 import javax.swing.GroupLayout;
@@ -144,6 +145,8 @@ public class CadastroFuncionarios extends JFrame {
 			regras.conecta();
 		} catch (SQLException ex) {
 			JOptionPane.showMessageDialog(null, "Descrição do erro:\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+		} catch (IOException ex) {
+			JOptionPane.showMessageDialog(null, "Descrição do erro:\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
 		}
 
 		try {
@@ -260,15 +263,21 @@ public class CadastroFuncionarios extends JFrame {
 						.addGroup(
 								groupLayout
 										.createParallelGroup(Alignment.LEADING)
-										.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup().addComponent(lblFuncionario).addContainerGap(168, Short.MAX_VALUE))
 										.addGroup(
 												Alignment.TRAILING,
-												groupLayout.createSequentialGroup().addComponent(lblNome, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
+												groupLayout.createSequentialGroup().addComponent(lblFuncionario)
+														.addContainerGap(168, Short.MAX_VALUE))
+										.addGroup(
+												Alignment.TRAILING,
+												groupLayout.createSequentialGroup()
+														.addComponent(lblNome, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
 														.addContainerGap(259, Short.MAX_VALUE))
 										.addGroup(
 												Alignment.TRAILING,
-												groupLayout.createSequentialGroup().addComponent(lblEnquadramentoFuncional, GroupLayout.PREFERRED_SIZE, 160, GroupLayout.PREFERRED_SIZE)
-														.addContainerGap(144, Short.MAX_VALUE))
+												groupLayout
+														.createSequentialGroup()
+														.addComponent(lblEnquadramentoFuncional, GroupLayout.PREFERRED_SIZE, 160,
+																GroupLayout.PREFERRED_SIZE).addContainerGap(144, Short.MAX_VALUE))
 										.addGroup(
 												Alignment.TRAILING,
 												groupLayout
@@ -276,33 +285,50 @@ public class CadastroFuncionarios extends JFrame {
 														.addGroup(
 																groupLayout
 																		.createParallelGroup(Alignment.LEADING)
-																		.addComponent(textEnquadramento_Funcional, GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
+																		.addComponent(textEnquadramento_Funcional, GroupLayout.DEFAULT_SIZE, 296,
+																				Short.MAX_VALUE)
 																		.addGroup(
 																				groupLayout
 																						.createSequentialGroup()
 																						.addGroup(
-																								groupLayout.createParallelGroup(Alignment.LEADING)
-																										.addComponent(textLogin, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE)
-																										.addComponent(lblLogin, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE))
+																								groupLayout
+																										.createParallelGroup(Alignment.LEADING)
+																										.addComponent(textLogin,
+																												GroupLayout.PREFERRED_SIZE, 140,
+																												GroupLayout.PREFERRED_SIZE)
+																										.addComponent(lblLogin,
+																												GroupLayout.PREFERRED_SIZE, 45,
+																												GroupLayout.PREFERRED_SIZE))
 																						.addGap(18)
 																						.addGroup(
-																								groupLayout.createParallelGroup(Alignment.LEADING)
-																										.addComponent(passwordSenha, GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
-																										.addComponent(lblSenha, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)))
+																								groupLayout
+																										.createParallelGroup(Alignment.LEADING)
+																										.addComponent(passwordSenha,
+																												GroupLayout.DEFAULT_SIZE, 138,
+																												Short.MAX_VALUE)
+																										.addComponent(lblSenha,
+																												GroupLayout.PREFERRED_SIZE, 45,
+																												GroupLayout.PREFERRED_SIZE)))
 																		.addGroup(
-																				groupLayout.createParallelGroup(Alignment.TRAILING, false)
-																						.addComponent(comboFuncionario, Alignment.LEADING, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-																						.addComponent(textNome, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE))).addGap(8))
+																				groupLayout
+																						.createParallelGroup(Alignment.TRAILING, false)
+																						.addComponent(comboFuncionario, Alignment.LEADING, 0,
+																								GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+																						.addComponent(textNome, Alignment.LEADING,
+																								GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)))
+														.addGap(8))
 										.addGroup(groupLayout.createSequentialGroup().addComponent(lblNivel).addContainerGap(258, Short.MAX_VALUE))
 										.addGroup(
-												groupLayout.createSequentialGroup().addComponent(btnCadastrar, GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE).addGap(23)
+												groupLayout.createSequentialGroup()
+														.addComponent(btnCadastrar, GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE).addGap(23)
 														.addComponent(btnAlterar, GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE).addGap(18)
 														.addComponent(btnExcluir, GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE).addGap(8))
 										.addGroup(
-												groupLayout.createSequentialGroup().addComponent(comboNivel, GroupLayout.PREFERRED_SIZE, 169, GroupLayout.PREFERRED_SIZE)
+												groupLayout.createSequentialGroup()
+														.addComponent(comboNivel, GroupLayout.PREFERRED_SIZE, 169, GroupLayout.PREFERRED_SIZE)
 														.addContainerGap(135, Short.MAX_VALUE)))));
-		groupLayout
-				.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(
+		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(
 						groupLayout
 								.createSequentialGroup()
 								.addContainerGap()
@@ -317,21 +343,27 @@ public class CadastroFuncionarios extends JFrame {
 								.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(lblLogin).addComponent(lblSenha))
 								.addGap(5)
 								.addGroup(
-										groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(textLogin, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-												.addComponent(passwordSenha, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+										groupLayout
+												.createParallelGroup(Alignment.BASELINE)
+												.addComponent(textLogin, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+														GroupLayout.PREFERRED_SIZE)
+												.addComponent(passwordSenha, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+														GroupLayout.PREFERRED_SIZE))
 								.addGap(5)
 								.addComponent(lblEnquadramentoFuncional)
 								.addPreferredGap(ComponentPlacement.RELATED)
-								.addComponent(textEnquadramento_Funcional, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(textEnquadramento_Funcional, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE)
 								.addPreferredGap(ComponentPlacement.RELATED)
 								.addComponent(lblNivel)
 								.addPreferredGap(ComponentPlacement.RELATED)
 								.addComponent(comboNivel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 								.addGap(18)
 								.addGroup(
-										groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(btnCadastrar, GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
-												.addComponent(btnExcluir, GroupLayout.PREFERRED_SIZE, 25, Short.MAX_VALUE).addComponent(btnAlterar, GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE))
-								.addGap(16)));
+										groupLayout.createParallelGroup(Alignment.BASELINE)
+												.addComponent(btnCadastrar, GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+												.addComponent(btnExcluir, GroupLayout.PREFERRED_SIZE, 25, Short.MAX_VALUE)
+												.addComponent(btnAlterar, GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)).addGap(16)));
 		getContentPane().setLayout(groupLayout);
 
 	}

@@ -6,6 +6,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
 import java.sql.SQLException;
 
 import javax.swing.GroupLayout;
@@ -144,9 +145,17 @@ public class CadastroProdutos extends JFrame {
 		});
 
 		try {
+
 			regras.conecta();
+
 		} catch (SQLException ex) {
+
 			JOptionPane.showMessageDialog(null, "Descrição do erro:\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+
+		} catch (IOException ex) {
+
+			JOptionPane.showMessageDialog(null, "Descrição do erro:\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+
 		}
 
 		try {
@@ -269,24 +278,38 @@ public class CadastroProdutos extends JFrame {
 												gl_contentPane
 														.createSequentialGroup()
 														.addGroup(
-																gl_contentPane.createParallelGroup(Alignment.LEADING)
-																		.addComponent(textCodigo, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE).addComponent(lblCodigo))
+																gl_contentPane
+																		.createParallelGroup(Alignment.LEADING)
+																		.addComponent(textCodigo, GroupLayout.PREFERRED_SIZE, 60,
+																				GroupLayout.PREFERRED_SIZE).addComponent(lblCodigo))
 														.addGap(18)
 														.addGroup(
-																gl_contentPane.createParallelGroup(Alignment.LEADING)
-																		.addGroup(gl_contentPane.createSequentialGroup().addComponent(lblNome).addGap(145))
+																gl_contentPane
+																		.createParallelGroup(Alignment.LEADING)
+																		.addGroup(
+																				gl_contentPane.createSequentialGroup().addComponent(lblNome)
+																						.addGap(145))
 																		.addComponent(textNome, GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)))
 										.addGroup(
 												gl_contentPane
 														.createSequentialGroup()
 														.addGroup(
-																gl_contentPane.createParallelGroup(Alignment.LEADING, false).addComponent(lblEnquadramento)
-																		.addComponent(comboEnquadramento, GroupLayout.PREFERRED_SIZE, 152, GroupLayout.PREFERRED_SIZE)).addGap(18)
-														.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addComponent(textValor).addComponent(lblValor)))
+																gl_contentPane
+																		.createParallelGroup(Alignment.LEADING, false)
+																		.addComponent(lblEnquadramento)
+																		.addComponent(comboEnquadramento, GroupLayout.PREFERRED_SIZE, 152,
+																				GroupLayout.PREFERRED_SIZE))
+														.addGap(18)
+														.addGroup(
+																gl_contentPane.createParallelGroup(Alignment.LEADING).addComponent(textValor)
+																		.addComponent(lblValor)))
 										.addGroup(
-												gl_contentPane.createSequentialGroup().addComponent(btnCadastrar, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE)
-														.addPreferredGap(ComponentPlacement.RELATED).addComponent(btnAlterar, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
-														.addPreferredGap(ComponentPlacement.UNRELATED).addComponent(btnExcluir, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE))
+												gl_contentPane.createSequentialGroup()
+														.addComponent(btnCadastrar, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE)
+														.addPreferredGap(ComponentPlacement.RELATED)
+														.addComponent(btnAlterar, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
+														.addPreferredGap(ComponentPlacement.UNRELATED)
+														.addComponent(btnExcluir, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE))
 										.addComponent(lblProduto).addComponent(comboProduto, 0, 256, Short.MAX_VALUE)).addContainerGap()));
 		gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(
 				gl_contentPane
@@ -298,20 +321,25 @@ public class CadastroProdutos extends JFrame {
 						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE).addComponent(lblCodigo).addComponent(lblNome))
 						.addPreferredGap(ComponentPlacement.RELATED)
 						.addGroup(
-								gl_contentPane.createParallelGroup(Alignment.BASELINE).addComponent(textCodigo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								gl_contentPane.createParallelGroup(Alignment.BASELINE)
+										.addComponent(textCodigo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 										.addComponent(textNome, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 						.addPreferredGap(ComponentPlacement.RELATED)
 						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE).addComponent(lblEnquadramento).addComponent(lblValor))
 						.addPreferredGap(ComponentPlacement.RELATED)
 						.addGroup(
-								gl_contentPane.createParallelGroup(Alignment.BASELINE)
-										.addComponent(comboEnquadramento, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								gl_contentPane
+										.createParallelGroup(Alignment.BASELINE)
+										.addComponent(comboEnquadramento, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+												GroupLayout.PREFERRED_SIZE)
 										.addComponent(textValor, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 						.addGap(10)
 						.addGroup(
-								gl_contentPane.createParallelGroup(Alignment.BASELINE).addComponent(btnCadastrar, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+								gl_contentPane.createParallelGroup(Alignment.BASELINE)
+										.addComponent(btnCadastrar, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
 										.addComponent(btnExcluir, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-										.addComponent(btnAlterar, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)).addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+										.addComponent(btnAlterar, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 		contentPane.setLayout(gl_contentPane);
 	}
 }

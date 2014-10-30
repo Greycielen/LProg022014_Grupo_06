@@ -55,8 +55,7 @@ public class Administrativo extends JFrame {
 		});
 		mnCadastros.add(mntmVeiculos);
 
-		JMenuItem mntmProdutosEServicos = new JMenuItem(
-				"Produtos e Servi\u00E7os");
+		JMenuItem mntmProdutosEServicos = new JMenuItem("Produtos e Servi\u00E7os");
 		mntmProdutosEServicos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				CadastroProdutos produtosgui = new CadastroProdutos();
@@ -89,8 +88,7 @@ public class Administrativo extends JFrame {
 		});
 		mnRelatorios.add(mntmHorasTrabalhadas);
 
-		JMenuItem mntmRelatorioDeSaida = new JMenuItem(
-				"Relat\u00F3rio de Sa\u00EDda do Ve\u00EDculo");
+		JMenuItem mntmRelatorioDeSaida = new JMenuItem("Relat\u00F3rio de Sa\u00EDda do Ve\u00EDculo");
 		mntmRelatorioDeSaida.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// TODO
@@ -144,22 +142,12 @@ public class Administrativo extends JFrame {
 		setContentPane(contentPane);
 
 		JLabel lblImagem = new JLabel("");
-		lblImagem
-				.setIcon(new ImageIcon(
-						"C:\\Users\\Guilherme\\Projetos\\SysAuto\\SysAuto\\src\\Persistencia\\Arquivos\\Sysauto.png"));
+		lblImagem.setIcon(new ImageIcon("C:\\Users\\Guilherme\\Projetos\\SysAuto\\SysAuto\\src\\Persistencia\\Arquivos\\Sysauto.png"));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(
-				Alignment.LEADING).addGroup(
-				gl_contentPane.createSequentialGroup().addGap(91)
-						.addComponent(lblImagem)
-						.addContainerGap(103, Short.MAX_VALUE)));
-		gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(
-				Alignment.LEADING).addGroup(
-				gl_contentPane
-						.createSequentialGroup()
-						.addComponent(lblImagem)
-						.addContainerGap(GroupLayout.DEFAULT_SIZE,
-								Short.MAX_VALUE)));
+		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(
+				gl_contentPane.createSequentialGroup().addGap(91).addComponent(lblImagem).addContainerGap(103, Short.MAX_VALUE)));
+		gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(
+				gl_contentPane.createSequentialGroup().addComponent(lblImagem).addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 		contentPane.setLayout(gl_contentPane);
 	}
 }

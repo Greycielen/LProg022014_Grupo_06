@@ -6,6 +6,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
 import java.sql.SQLException;
 
 import javax.swing.GroupLayout;
@@ -138,8 +139,15 @@ public class CadastroVeiculos extends JFrame {
 		});
 
 		try {
+
 			regras.conecta();
+
 		} catch (SQLException ex) {
+
+			JOptionPane.showMessageDialog(null, "Descrição do erro:\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+
+		} catch (IOException ex) {
+
 			JOptionPane.showMessageDialog(null, "Descrição do erro:\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
 		}
 
@@ -265,28 +273,41 @@ public class CadastroVeiculos extends JFrame {
 		});
 
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(
-				gl_contentPane
-						.createSequentialGroup()
-						.addGroup(
-								gl_contentPane
-										.createParallelGroup(Alignment.LEADING, false)
-										.addComponent(lblModelo, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
-										.addComponent(lblCor, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
-										.addGroup(
-												gl_contentPane.createSequentialGroup().addComponent(lblPlaca, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE).addGap(91)
-														.addComponent(lblAno, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE))
-										.addGroup(
-												gl_contentPane.createSequentialGroup().addComponent(textPlaca, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE).addGap(48)
-														.addComponent(textAno, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE))
-										.addComponent(lblProprietario, GroupLayout.PREFERRED_SIZE, 171, GroupLayout.PREFERRED_SIZE)
-										.addComponent(lblContato, GroupLayout.PREFERRED_SIZE, 182, GroupLayout.PREFERRED_SIZE)
-										.addGroup(
-												gl_contentPane.createSequentialGroup().addComponent(buttonCadastrar, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE).addGap(6)
-														.addComponent(buttonAlterar, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE).addGap(6)
-														.addComponent(buttonExcluir, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)).addComponent(lblVeiculo).addComponent(textContato)
-										.addComponent(textProprietario).addComponent(textCor).addComponent(textModelo).addComponent(comboVeiculo, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-						.addContainerGap(15, Short.MAX_VALUE)));
+		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(
+						gl_contentPane
+								.createSequentialGroup()
+								.addGroup(
+										gl_contentPane
+												.createParallelGroup(Alignment.LEADING, false)
+												.addComponent(lblModelo, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
+												.addComponent(lblCor, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
+												.addGroup(
+														gl_contentPane.createSequentialGroup()
+																.addComponent(lblPlaca, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
+																.addGap(91)
+																.addComponent(lblAno, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE))
+												.addGroup(
+														gl_contentPane.createSequentialGroup()
+																.addComponent(textPlaca, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE)
+																.addGap(48)
+																.addComponent(textAno, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE))
+												.addComponent(lblProprietario, GroupLayout.PREFERRED_SIZE, 171, GroupLayout.PREFERRED_SIZE)
+												.addComponent(lblContato, GroupLayout.PREFERRED_SIZE, 182, GroupLayout.PREFERRED_SIZE)
+												.addGroup(
+														gl_contentPane
+																.createSequentialGroup()
+																.addComponent(buttonCadastrar, GroupLayout.PREFERRED_SIZE, 95,
+																		GroupLayout.PREFERRED_SIZE)
+																.addGap(6)
+																.addComponent(buttonAlterar, GroupLayout.PREFERRED_SIZE, 80,
+																		GroupLayout.PREFERRED_SIZE)
+																.addGap(6)
+																.addComponent(buttonExcluir, GroupLayout.PREFERRED_SIZE, 80,
+																		GroupLayout.PREFERRED_SIZE)).addComponent(lblVeiculo)
+												.addComponent(textContato).addComponent(textProprietario).addComponent(textCor)
+												.addComponent(textModelo).addComponent(comboVeiculo, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+								.addContainerGap(15, Short.MAX_VALUE)));
 		gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(
 				gl_contentPane
 						.createSequentialGroup()
@@ -304,11 +325,13 @@ public class CadastroVeiculos extends JFrame {
 						.addComponent(textCor, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(ComponentPlacement.RELATED)
 						.addGroup(
-								gl_contentPane.createParallelGroup(Alignment.LEADING).addComponent(lblPlaca, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
+								gl_contentPane.createParallelGroup(Alignment.LEADING)
+										.addComponent(lblPlaca, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
 										.addComponent(lblAno, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE))
 						.addGap(3)
 						.addGroup(
-								gl_contentPane.createParallelGroup(Alignment.LEADING).addComponent(textPlaca, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								gl_contentPane.createParallelGroup(Alignment.LEADING)
+										.addComponent(textPlaca, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 										.addComponent(textAno, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 						.addGap(6)
 						.addComponent(lblProprietario, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
@@ -320,9 +343,11 @@ public class CadastroVeiculos extends JFrame {
 						.addComponent(textContato, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addGap(11)
 						.addGroup(
-								gl_contentPane.createParallelGroup(Alignment.LEADING).addComponent(buttonCadastrar, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+								gl_contentPane.createParallelGroup(Alignment.LEADING)
+										.addComponent(buttonCadastrar, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
 										.addComponent(buttonAlterar, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-										.addComponent(buttonExcluir, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)).addContainerGap(12, Short.MAX_VALUE)));
+										.addComponent(buttonExcluir, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+						.addContainerGap(12, Short.MAX_VALUE)));
 		contentPane.setLayout(gl_contentPane);
 	}
 }

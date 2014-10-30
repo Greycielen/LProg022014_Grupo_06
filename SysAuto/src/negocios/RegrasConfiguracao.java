@@ -1,19 +1,16 @@
 package negocios;
 
-import java.io.File;
 import java.io.IOException;
 
-import persistencia.Persistencia_File;
+import persistencia.Persistencia;
 
 public class RegrasConfiguracao {
 
-	Persistencia_File arquivo = new Persistencia_File();
-	File file = new File("C://SysAuto/config.txt");
+	public void configura(String IP, String usuario, String senha) throws IOException {
 
-	public void Configuracao(String IP, String usuario, String senha)
-			throws IOException {
+		Persistencia configuracao = new Persistencia();
 
-		arquivo.Configuracao(IP, usuario, senha);
+		configuracao.criaConfiguracao(IP, usuario, senha);
 
 	}
 

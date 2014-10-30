@@ -1,5 +1,11 @@
 package persistencia;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -8,24 +14,91 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import modelos.ModeloFuncionario;
 import modelos.ModeloProduto;
 import modelos.ModeloVeiculo;
 
-public class Persistencia_DB {
+public class Persistencia {
 
 	public Statement stm;
 	public ResultSet rs;
 	private String drive = "com.mysql.jdbc.Driver.jar";
-	private String caminho = "jdbc:mysql://127.0.0.1/sysautodb";
-	private String usuario = "root";
-	private String senha = "";
 	public Connection con;
 
-	public void conexao() throws SQLException {
+	public void lerConfiguracao() throws IOException {
+
+		File diretorio = new File("C:\\SysAuto");
+		File arquivo = new File(diretorio, "server.conf");
+
+		FileReader fileReader = new FileReader(arquivo);
+		BufferedReader reader = new BufferedReader(fileReader);
+
+		ArrayList<String> config = new ArrayList<String>();
+
+		while (reader.readLine() != null) {
+
+			config.add(reader.readLine());
+			JOptionPane.showMessageDialog(null, config);
+
+		}
+
+		fileReader.close();
+		reader.close();
+
+	}
+
+	public void criaConfiguracao(String IP, String usuario, String senha) throws IOException {
+
+		File diretorio = new File("C:\\SysAuto");
+		File arquivo = new File(diretorio, "server.conf");
+
+		if (!diretorio.exists()) {
+
+			diretorio.mkdir();
+
+			if (!arquivo.exists()) {
+				arquivo.createNewFile();
+			}
+
+		} else {
+
+			if (!arquivo.exists()) {
+
+				arquivo.createNewFile();
+
+			}
+
+		}
+
+		FileWriter filewriter = new FileWriter(arquivo, false);
+		PrintWriter printwriter = new PrintWriter(filewriter);
+
+		printwriter.println(IP);
+		printwriter.println(usuario);
+		printwriter.println(senha);
+
+		printwriter.flush();
+		printwriter.close();
+
+	}
+
+	public void conexao() throws SQLException, IOException {
+
+		String endereco_inicio = "jdbc:mysql://";
+		String endereco_fim = "/sysautodb";
+		String endereco = null;
+		String IP = null;
+		String usuario = null;
+		String senha = null;
+
+		this.lerConfiguracao();
+
+		endereco = endereco_inicio + IP + endereco_fim;
 
 		System.setProperty("jdbc.Drivers", drive);
-		con = DriverManager.getConnection(caminho, usuario, senha);
+		con = DriverManager.getConnection(endereco, usuario, senha);
 
 	}
 
@@ -37,8 +110,7 @@ public class Persistencia_DB {
 
 	public void executaSQL(String SQL) throws SQLException {
 
-		stm = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-				ResultSet.CONCUR_READ_ONLY);
+		stm = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 		rs = stm.executeQuery(SQL);
 
 	}
@@ -50,8 +122,7 @@ public class Persistencia_DB {
 		this.executaSQL("SELECT concat('<',idProduto, '> ', nome) FROM produtos ORDER BY concat('<',idProduto, '> ', nome) ASC");
 		this.rs.first();
 		do {
-			lista_produtos.add(this.rs
-					.getString("concat('<',idProduto, '> ', nome)"));
+			lista_produtos.add(this.rs.getString("concat('<',idProduto, '> ', nome)"));
 		} while (this.rs.next());
 
 		return lista_produtos;
@@ -61,8 +132,7 @@ public class Persistencia_DB {
 
 		ModeloProduto produto = new ModeloProduto();
 
-		this.executaSQL("SELECT * FROM produtos WHERE idProduto = '" + codigo
-				+ "'");
+		this.executaSQL("SELECT * FROM produtos WHERE idProduto = '" + codigo + "'");
 		this.rs.first();
 		produto.setCodigo(this.rs.getString("idProduto"));
 		produto.setNome(this.rs.getString("nome"));
@@ -74,8 +144,7 @@ public class Persistencia_DB {
 
 	public void salvarProduto(ModeloProduto produto) throws SQLException {
 
-		PreparedStatement pst = this.con
-				.prepareStatement("INSERT INTO produtos(idProduto, nome, enquadramento, valor) values(?, ?, ?, ?)");
+		PreparedStatement pst = this.con.prepareStatement("INSERT INTO produtos(idProduto, nome, enquadramento, valor) values(?, ?, ?, ?)");
 		pst.setString(1, produto.getCodigo());
 		pst.setString(2, produto.getNome());
 		pst.setString(3, produto.getEnquadramento());
@@ -99,8 +168,7 @@ public class Persistencia_DB {
 
 	public void excluirProduto(String codigo) throws SQLException {
 
-		PreparedStatement pst = this.con
-				.prepareStatement("DELETE FROM produtos WHERE idProduto = ?");
+		PreparedStatement pst = this.con.prepareStatement("DELETE FROM produtos WHERE idProduto = ?");
 		pst.setString(1, codigo);
 		pst.execute();
 
@@ -113,8 +181,7 @@ public class Persistencia_DB {
 		this.executaSQL("SELECT concat(' <',placa,'> ', modelo) FROM veiculos ORDER BY concat(' <',placa,'> ', modelo) ASC");
 		this.rs.first();
 		do {
-			lista_veiculos.add(this.rs
-					.getString("concat(' <',placa,'> ', modelo)"));
+			lista_veiculos.add(this.rs.getString("concat(' <',placa,'> ', modelo)"));
 		} while (this.rs.next());
 
 		return lista_veiculos;
@@ -167,8 +234,7 @@ public class Persistencia_DB {
 
 	public void excluirVeiculo(String placa) throws SQLException {
 
-		PreparedStatement pst = this.con
-				.prepareStatement("DELETE FROM veiculos WHERE placa = ?");
+		PreparedStatement pst = this.con.prepareStatement("DELETE FROM veiculos WHERE placa = ?");
 		pst.setString(1, placa);
 		pst.execute();
 
@@ -188,8 +254,7 @@ public class Persistencia_DB {
 
 	}
 
-	public ModeloFuncionario consultarFuncionario(String nome)
-			throws SQLException {
+	public ModeloFuncionario consultarFuncionario(String nome) throws SQLException {
 
 		ModeloFuncionario funcionario = new ModeloFuncionario();
 
@@ -198,33 +263,28 @@ public class Persistencia_DB {
 		funcionario.setNome(this.rs.getString("nome"));
 		funcionario.setLogin(this.rs.getString("login"));
 		funcionario.setSenha(this.rs.getString("senha"));
-		funcionario.setEnquadramento_funcional(this.rs
-				.getString("enquadramento_funcional"));
+		funcionario.setEnquadramento_funcional(this.rs.getString("enquadramento_funcional"));
 		funcionario.setNivel_acesso(this.rs.getString("nivel_acesso"));
 
 		return funcionario;
 	}
 
-	public ModeloFuncionario consultarFuncionarioLogin(String login)
-			throws SQLException {
+	public ModeloFuncionario consultarFuncionarioLogin(String login) throws SQLException {
 
 		ModeloFuncionario funcionario = new ModeloFuncionario();
 
-		this.executaSQL("SELECT * FROM funcionarios WHERE login ='" + login
-				+ "'");
+		this.executaSQL("SELECT * FROM funcionarios WHERE login ='" + login + "'");
 		this.rs.first();
 		funcionario.setNome(this.rs.getString("nome"));
 		funcionario.setLogin(this.rs.getString("login"));
 		funcionario.setSenha(this.rs.getString("senha"));
-		funcionario.setEnquadramento_funcional(this.rs
-				.getString("enquadramento_funcional"));
+		funcionario.setEnquadramento_funcional(this.rs.getString("enquadramento_funcional"));
 		funcionario.setNivel_acesso(this.rs.getString("nivel_acesso"));
 
 		return funcionario;
 	}
 
-	public void salvarFuncionario(ModeloFuncionario funcionario)
-			throws SQLException {
+	public void salvarFuncionario(ModeloFuncionario funcionario) throws SQLException {
 
 		PreparedStatement pst = this.con
 				.prepareStatement("INSERT INTO funcionarios(login, senha, nome, enquadramento_funcional, nivel_acesso) values(?, ?, ?, ?, ?)");
@@ -237,8 +297,7 @@ public class Persistencia_DB {
 
 	}
 
-	public void alterarFuncionario(ModeloFuncionario funcionario)
-			throws SQLException {
+	public void alterarFuncionario(ModeloFuncionario funcionario) throws SQLException {
 
 		PreparedStatement pst = this.con
 				.prepareStatement("UPDATE funcionarios SET login = ? , senha = ?, nome = ?, enquadramento_funcional = ?, nivel_acesso = ? where login = ?");
@@ -254,8 +313,7 @@ public class Persistencia_DB {
 
 	public void excluirFuncionario(String login) throws SQLException {
 
-		PreparedStatement pst = this.con
-				.prepareStatement("DELETE FROM funcionarios WHERE login = ?");
+		PreparedStatement pst = this.con.prepareStatement("DELETE FROM funcionarios WHERE login = ?");
 		pst.setString(1, login);
 		pst.execute();
 

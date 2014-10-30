@@ -18,7 +18,7 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 
-import negocios.RegrasConfiguracao;
+import persistencia.Persistencia;
 
 @SuppressWarnings("serial")
 public class ConfigurarServidor extends JFrame {
@@ -80,7 +80,7 @@ public class ConfigurarServidor extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 
-				RegrasConfiguracao configuracao = new RegrasConfiguracao();
+				Persistencia configuracao = new Persistencia();
 
 				String IP = textIP.getText();
 				String usuario = textUsuario.getText();
@@ -89,144 +89,80 @@ public class ConfigurarServidor extends JFrame {
 
 				try {
 
-					configuracao.Configuracao(IP, usuario, senha);
+					configuracao.criaConfiguracao(IP, usuario, senha);
 
 				} catch (IOException ex) {
 
-					JOptionPane.showMessageDialog(null, "Descrição do erro:\n"
-							+ ex.getMessage(), "Erro",
-							JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Descrição do erro:\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
 
 				}
 
-				JOptionPane.showMessageDialog(null,
-						"Servidor Configurado com Sucesso!");
+				JOptionPane.showMessageDialog(null, "Servidor Configurado com Sucesso!");
 				setVisible(false);
 
 			}
 		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane
-				.setHorizontalGroup(gl_contentPane
-						.createParallelGroup(Alignment.LEADING)
-						.addGroup(
-								gl_contentPane
-										.createSequentialGroup()
-										.addGroup(
-												gl_contentPane
-														.createParallelGroup(
-																Alignment.LEADING)
-														.addGroup(
-																gl_contentPane
-																		.createParallelGroup(
-																				Alignment.TRAILING)
-																		.addComponent(
-																				lblUsuario,
-																				Alignment.LEADING)
-																		.addComponent(
-																				lblIP,
-																				Alignment.LEADING)
-																		.addComponent(
-																				textUsuario,
-																				Alignment.LEADING,
-																				GroupLayout.DEFAULT_SIZE,
-																				89,
-																				Short.MAX_VALUE))
-														.addGroup(
-																gl_contentPane
-																		.createSequentialGroup()
-																		.addComponent(
-																				btnSalvar,
-																				GroupLayout.PREFERRED_SIZE,
-																				89,
-																				GroupLayout.PREFERRED_SIZE)
-																		.addPreferredGap(
-																				ComponentPlacement.RELATED)))
-										.addGroup(
-												gl_contentPane
-														.createParallelGroup(
-																Alignment.LEADING,
-																false)
-														.addGroup(
-																gl_contentPane
-																		.createSequentialGroup()
-																		.addGap(17)
-																		.addGroup(
-																				gl_contentPane
-																						.createParallelGroup(
-																								Alignment.TRAILING)
-																						.addGroup(
-																								gl_contentPane
-																										.createSequentialGroup()
-																										.addComponent(
-																												lblSenha)
-																										.addGap(63))
-																						.addComponent(
-																								passwordSenha,
-																								Alignment.LEADING,
-																								GroupLayout.PREFERRED_SIZE,
-																								99,
-																								GroupLayout.PREFERRED_SIZE)))
-														.addGroup(
-																gl_contentPane
-																		.createSequentialGroup()
-																		.addGap(18)
-																		.addComponent(
-																				btnCancelar,
-																				GroupLayout.DEFAULT_SIZE,
-																				GroupLayout.DEFAULT_SIZE,
-																				Short.MAX_VALUE))))
-						.addComponent(textIP, GroupLayout.DEFAULT_SIZE, 205,
-								Short.MAX_VALUE));
-		gl_contentPane
-				.setVerticalGroup(gl_contentPane
-						.createParallelGroup(Alignment.LEADING)
-						.addGroup(
-								gl_contentPane
-										.createSequentialGroup()
-										.addComponent(lblIP)
-										.addPreferredGap(
-												ComponentPlacement.RELATED)
-										.addComponent(textIP,
-												GroupLayout.PREFERRED_SIZE,
-												GroupLayout.DEFAULT_SIZE,
-												GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(
-												ComponentPlacement.RELATED)
-										.addGroup(
-												gl_contentPane
-														.createParallelGroup(
-																Alignment.BASELINE)
-														.addComponent(
-																lblUsuario)
-														.addComponent(lblSenha))
-										.addPreferredGap(
-												ComponentPlacement.RELATED)
-										.addGroup(
-												gl_contentPane
-														.createParallelGroup(
-																Alignment.BASELINE)
-														.addComponent(
-																textUsuario,
-																GroupLayout.PREFERRED_SIZE,
-																GroupLayout.DEFAULT_SIZE,
-																GroupLayout.PREFERRED_SIZE)
-														.addComponent(
-																passwordSenha,
-																GroupLayout.PREFERRED_SIZE,
-																GroupLayout.DEFAULT_SIZE,
-																GroupLayout.PREFERRED_SIZE))
-										.addGap(18)
-										.addGroup(
-												gl_contentPane
-														.createParallelGroup(
-																Alignment.BASELINE)
-														.addComponent(
-																btnCancelar)
-														.addComponent(btnSalvar))
-										.addContainerGap(
-												GroupLayout.DEFAULT_SIZE,
-												Short.MAX_VALUE)));
+		gl_contentPane.setHorizontalGroup(gl_contentPane
+				.createParallelGroup(Alignment.LEADING)
+				.addGroup(
+						gl_contentPane
+								.createSequentialGroup()
+								.addGroup(
+										gl_contentPane
+												.createParallelGroup(Alignment.LEADING)
+												.addGroup(
+														gl_contentPane
+																.createParallelGroup(Alignment.TRAILING)
+																.addComponent(lblUsuario, Alignment.LEADING)
+																.addComponent(lblIP, Alignment.LEADING)
+																.addComponent(textUsuario, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 89,
+																		Short.MAX_VALUE))
+												.addGroup(
+														gl_contentPane.createSequentialGroup()
+																.addComponent(btnSalvar, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
+																.addPreferredGap(ComponentPlacement.RELATED)))
+								.addGroup(
+										gl_contentPane
+												.createParallelGroup(Alignment.LEADING, false)
+												.addGroup(
+														gl_contentPane
+																.createSequentialGroup()
+																.addGap(17)
+																.addGroup(
+																		gl_contentPane
+																				.createParallelGroup(Alignment.TRAILING)
+																				.addGroup(
+																						gl_contentPane.createSequentialGroup().addComponent(lblSenha)
+																								.addGap(63))
+																				.addComponent(passwordSenha, Alignment.LEADING,
+																						GroupLayout.PREFERRED_SIZE, 99, GroupLayout.PREFERRED_SIZE)))
+												.addGroup(
+														gl_contentPane
+																.createSequentialGroup()
+																.addGap(18)
+																.addComponent(btnCancelar, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
+																		Short.MAX_VALUE))))
+				.addComponent(textIP, GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE));
+		gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(
+						gl_contentPane
+								.createSequentialGroup()
+								.addComponent(lblIP)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(textIP, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE).addComponent(lblUsuario).addComponent(lblSenha))
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addGroup(
+										gl_contentPane
+												.createParallelGroup(Alignment.BASELINE)
+												.addComponent(textUsuario, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+														GroupLayout.PREFERRED_SIZE)
+												.addComponent(passwordSenha, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+														GroupLayout.PREFERRED_SIZE)).addGap(18)
+								.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE).addComponent(btnCancelar).addComponent(btnSalvar))
+								.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 		contentPane.setLayout(gl_contentPane);
 	}
 }

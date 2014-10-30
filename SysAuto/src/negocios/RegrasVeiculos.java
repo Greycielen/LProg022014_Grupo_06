@@ -1,15 +1,16 @@
 package negocios;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import modelos.ModeloVeiculo;
-import persistencia.Persistencia_DB;
+import persistencia.Persistencia;
 
 public class RegrasVeiculos {
-	Persistencia_DB bancodedados = new Persistencia_DB();
+	Persistencia bancodedados = new Persistencia();
 
-	public void conecta() throws SQLException {
+	public void conecta() throws SQLException, IOException {
 		bancodedados.conexao();
 	}
 
