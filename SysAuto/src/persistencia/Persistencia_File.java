@@ -1,23 +1,47 @@
 package persistencia;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
 public class Persistencia_File {
 
-	public void criaConfiguracao() throws IOException {
+	public void Configuracao(String IP, String usuario, String senha)
+			throws IOException {
 
-		java.io.File diretorio = new java.io.File("C://SysAuto/Config");
-		java.io.File arquivo = new java.io.File(diretorio, "config.txt");
-		arquivo.createNewFile();
+		File diretorio = new File("C:\\SysAuto");
+		File arquivo = new File(diretorio, "server.conf");
 
-		FileWriter fileWriter = new FileWriter(arquivo, false);
-		PrintWriter printWriter = new PrintWriter(fileWriter);
+		if (!diretorio.exists()) {
 
-		printWriter.println();
+			diretorio.mkdir();
 
-		printWriter.close();
+			if (!arquivo.exists()) {
+
+				arquivo.createNewFile();
+
+			}
+
+		} else {
+
+			if (!arquivo.exists()) {
+
+				arquivo.createNewFile();
+
+			}
+
+		}
+
+		FileWriter filewriter = new FileWriter(arquivo, false);
+		PrintWriter printwriter = new PrintWriter(filewriter);
+
+		printwriter.println(IP);
+		printwriter.println(usuario);
+		printwriter.println(senha);
+
+		printwriter.flush();
+		printwriter.close();
 
 	}
 

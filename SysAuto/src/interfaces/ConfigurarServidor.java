@@ -4,17 +4,21 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
+
+import negocios.RegrasConfiguracao;
 
 @SuppressWarnings("serial")
 public class ConfigurarServidor extends JFrame {
@@ -76,7 +80,28 @@ public class ConfigurarServidor extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 
-				// TODO
+				RegrasConfiguracao configuracao = new RegrasConfiguracao();
+
+				String IP = textIP.getText();
+				String usuario = textUsuario.getText();
+				@SuppressWarnings("deprecation")
+				String senha = passwordSenha.getText();
+
+				try {
+
+					configuracao.Configuracao(IP, usuario, senha);
+
+				} catch (IOException ex) {
+
+					JOptionPane.showMessageDialog(null, "Descrição do erro:\n"
+							+ ex.getMessage(), "Erro",
+							JOptionPane.ERROR_MESSAGE);
+
+				}
+
+				JOptionPane.showMessageDialog(null,
+						"Servidor Configurado com Sucesso!");
+				setVisible(false);
 
 			}
 		});
