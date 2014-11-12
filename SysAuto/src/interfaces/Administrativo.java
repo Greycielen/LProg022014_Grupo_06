@@ -118,13 +118,13 @@ public class Administrativo extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 
-		JLabel lblImagem = new JLabel("");
-		lblImagem.setIcon(new ImageIcon("C:\\Users\\Guilherme\\Projetos\\SysAuto\\SysAuto\\src\\Persistencia\\Arquivos\\Sysauto.png"));
+		JLabel lblWallpaper = new JLabel("");
+		lblWallpaper.setIcon(new ImageIcon(Administrativo.class.getResource("/persistencia/Arquivos/Sysauto.png")));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(
-				gl_contentPane.createSequentialGroup().addGap(91).addComponent(lblImagem).addContainerGap(103, Short.MAX_VALUE)));
+				gl_contentPane.createSequentialGroup().addGap(91).addComponent(lblWallpaper).addContainerGap(103, Short.MAX_VALUE)));
 		gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(
-				gl_contentPane.createSequentialGroup().addComponent(lblImagem).addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+				gl_contentPane.createSequentialGroup().addComponent(lblWallpaper).addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 		contentPane.setLayout(gl_contentPane);
 	}
 }
