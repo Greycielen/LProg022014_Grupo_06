@@ -2,6 +2,8 @@ package interfaces;
 
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -12,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -53,6 +56,19 @@ public class Frente_de_Servico extends JFrame {
 
 		JMenu mnServios = new JMenu("Servi\u00E7os");
 		menuBar.add(mnServios);
+
+		JMenuItem mntmSeleciona = new JMenuItem("Selecionar Ve\u00EDculo");
+		mntmSeleciona.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				SelecaoVeiculo selecao = new SelecaoVeiculo();
+				selecao.setVisible(true);
+
+			}
+
+		});
+
+		mnServios.add(mntmSeleciona);
 
 		JMenu mnRelatorios = new JMenu("Relatorios");
 		menuBar.add(mnRelatorios);
