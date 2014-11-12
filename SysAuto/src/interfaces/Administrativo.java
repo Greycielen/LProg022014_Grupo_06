@@ -57,27 +57,38 @@ public class Administrativo extends JFrame {
 		JMenuItem mntmVeiculos = new JMenuItem("Ve\u00EDculos");
 		mntmVeiculos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+
 				CadastroVeiculos veiculosgui = new CadastroVeiculos();
 				veiculosgui.setVisible(true);
+
 			}
+
 		});
+
 		mnCadastros.add(mntmVeiculos);
 
 		JMenuItem mntmProdutosEServicos = new JMenuItem("Produtos e Servi\u00E7os");
 		mntmProdutosEServicos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+
 				CadastroProdutos produtosgui = new CadastroProdutos();
 				produtosgui.setVisible(true);
+
 			}
+
 		});
+
 		mnCadastros.add(mntmProdutosEServicos);
 
 		JMenuItem mntmFuncionarios = new JMenuItem("Funcion\u00E1rios");
 		mntmFuncionarios.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+
 				CadastroFuncionarios funcionariosgui = new CadastroFuncionarios();
 				funcionariosgui.setVisible(true);
+
 			}
+
 		});
 
 		setTitle("SysAuto - Administrativo");
@@ -91,25 +102,36 @@ public class Administrativo extends JFrame {
 		JMenuItem mntmHorasTrabalhadas = new JMenuItem("Horas Trabalhadas");
 		mntmHorasTrabalhadas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
 				// TODO
+
 			}
+
 		});
+
 		mnRelatorios.add(mntmHorasTrabalhadas);
 
 		JMenuItem mntmRelatorioDeSaida = new JMenuItem("Relat\u00F3rio de Sa\u00EDda do Ve\u00EDculo");
 		mntmRelatorioDeSaida.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
 				// TODO
+
 			}
+
 		});
+
 		mnRelatorios.add(mntmRelatorioDeSaida);
 
 		JMenu mnSair = new JMenu("Sair");
 		mnSair.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+
 				setVisible(false);
+
 			}
+
 		});
 
 		menuBar.add(mnSair);
@@ -126,5 +148,7 @@ public class Administrativo extends JFrame {
 		gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(
 				gl_contentPane.createSequentialGroup().addComponent(lblWallpaper).addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 		contentPane.setLayout(gl_contentPane);
+
 	}
+
 }

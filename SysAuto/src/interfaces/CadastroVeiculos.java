@@ -4,9 +4,6 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.io.IOException;
 import java.sql.SQLException;
 
 import javax.swing.GroupLayout;
@@ -45,13 +42,20 @@ public class CadastroVeiculos extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+
 					CadastroVeiculos frame = new CadastroVeiculos();
 					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
+
+				} catch (Exception ex) {
+
+					JOptionPane.showMessageDialog(null, "Descrição do erro:\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+
 				}
+
 			}
+
 		});
+
 	}
 
 	private void preencherCombo(JComboBox<String> comboVeiculo) throws SQLException {
@@ -61,6 +65,7 @@ public class CadastroVeiculos extends JFrame {
 		for (int i = 0; i < regras.listaVeiculos().size(); i++) {
 
 			comboVeiculo.addItem((String) regras.listaVeiculos().get(i).toString());
+
 		}
 
 	}
@@ -83,33 +88,45 @@ public class CadastroVeiculos extends JFrame {
 			textContato.setText(veiculo.getContato());
 
 		} catch (SQLException ex) {
+
 			JOptionPane.showMessageDialog(null, "Descrição do erro:\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+
 		}
 
 	}
 
 	public void lerCampos() {
+
 		veiculo.setPlaca(textPlaca.getText());
 		veiculo.setModelo(textModelo.getText());
 		veiculo.setCor(textCor.getText());
 		veiculo.setAno(textAno.getText());
 		veiculo.setProprietario(textProprietario.getText());
 		veiculo.setContato(textContato.getText());
+
 	}
 
 	public void limparCampos(JComboBox<String> comboVeiculo) {
+
 		comboVeiculo.removeAllItems();
+
 		try {
+
 			preencherCombo(comboVeiculo);
+
 		} catch (SQLException ex) {
+
 			JOptionPane.showMessageDialog(null, "Descrição do erro:\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+
 		}
+
 		textPlaca.setText(null);
 		textModelo.setText(null);
 		textCor.setText(null);
 		textAno.setText(null);
 		textProprietario.setText(null);
 		textContato.setText(null);
+
 	}
 
 	public CadastroVeiculos() {
@@ -129,13 +146,16 @@ public class CadastroVeiculos extends JFrame {
 					comboVeiculo.setSelectedItem((String) "<NOVO VEICULO>");
 
 				} else {
+
 					preencheCampos(comboVeiculo);
+
 				}
 
 			}
 
 			public void popupMenuWillBecomeVisible(PopupMenuEvent arg0) {
 			}
+
 		});
 
 		try {
@@ -146,15 +166,16 @@ public class CadastroVeiculos extends JFrame {
 
 			JOptionPane.showMessageDialog(null, "Descrição do erro:\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
 
-		} catch (IOException ex) {
-
-			JOptionPane.showMessageDialog(null, "Descrição do erro:\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
 		}
 
 		try {
+
 			preencherCombo(comboVeiculo);
+
 		} catch (SQLException ex) {
+
 			JOptionPane.showMessageDialog(null, "Cadastre ao menos um veiculo!", "Erro", JOptionPane.ERROR_MESSAGE);
+
 		}
 
 		setTitle("Cadastro/Altera\u00E7\u00E3o/Exclus\u00E3o");
@@ -206,18 +227,6 @@ public class CadastroVeiculos extends JFrame {
 		JLabel lblVeiculo = new JLabel("Selecione um veiculo:");
 		lblVeiculo.setFont(new Font("Arial", Font.BOLD, 12));
 
-		addWindowListener(new WindowAdapter() {
-			public void windowClosing(WindowEvent arg0) {
-
-				try {
-					regras.desconecta();
-				} catch (SQLException ex) {
-					JOptionPane.showMessageDialog(null, "Descrição do erro:\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-				}
-
-			}
-		});
-
 		JButton buttonCadastrar = new JButton("Cadastrar");
 		buttonCadastrar.addMouseListener(new MouseAdapter() {
 			@Override
@@ -226,14 +235,19 @@ public class CadastroVeiculos extends JFrame {
 				lerCampos();
 
 				try {
+
 					regras.cadastraVeiculo(veiculo);
+
 				} catch (SQLException ex) {
+
 					JOptionPane.showMessageDialog(null, "Descrição do erro:\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+
 				}
 
 				limparCampos(comboVeiculo);
 
 			}
+
 		});
 
 		JButton buttonAlterar = new JButton("Alterar");
@@ -244,14 +258,19 @@ public class CadastroVeiculos extends JFrame {
 				lerCampos();
 
 				try {
+
 					regras.atualizaVeiculo(veiculo);
+
 				} catch (SQLException ex) {
+
 					JOptionPane.showMessageDialog(null, "Descrição do erro:\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+
 				}
 
 				limparCampos(comboVeiculo);
 
 			}
+
 		});
 
 		JButton buttonExcluir = new JButton("Excluir");
@@ -262,14 +281,19 @@ public class CadastroVeiculos extends JFrame {
 				lerCampos();
 
 				try {
+
 					regras.excluiVeiculo(veiculo.getPlaca());
+
 				} catch (SQLException ex) {
+
 					JOptionPane.showMessageDialog(null, "Descrição do erro:\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+
 				}
 
 				limparCampos(comboVeiculo);
 
 			}
+
 		});
 
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);

@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -24,16 +25,24 @@ public class Frente_de_Servico extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+
 					Frente_de_Servico frame = new Frente_de_Servico();
 					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
+
+				} catch (Exception ex) {
+
+					JOptionPane.showMessageDialog(null, "Descrição do erro:\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+
 				}
+
 			}
+
 		});
+
 	}
 
 	public Frente_de_Servico() {
+
 		setBackground(Color.WHITE);
 		setTitle("SysAuto - Frente de Servi\u00E7o");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -52,9 +61,13 @@ public class Frente_de_Servico extends JFrame {
 		mnSair.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+
 				setVisible(false);
+
 			}
+
 		});
+
 		menuBar.add(mnSair);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);

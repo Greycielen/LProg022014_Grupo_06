@@ -4,8 +4,6 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.sql.SQLException;
 
 import javax.swing.GroupLayout;
@@ -45,13 +43,20 @@ public class CadastroFuncionarios extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+
 					CadastroFuncionarios frame = new CadastroFuncionarios();
 					frame.setVisible(true);
+
 				} catch (Exception ex) {
+
 					JOptionPane.showMessageDialog(null, "Descrição do erro:\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+
 				}
+
 			}
+
 		});
+
 	}
 
 	public void preencherCombos(JComboBox<String> comboFuncionario, JComboBox<String> comboNivel) throws SQLException {
@@ -63,7 +68,9 @@ public class CadastroFuncionarios extends JFrame {
 		for (int i = 0; i < regras.listaFuncionarios().size(); i++) {
 
 			comboFuncionario.addItem((String) regras.listaFuncionarios().get(i).toString());
+
 		}
+
 	}
 
 	public void preencherCampos(JComboBox<String> comboFuncionario, JComboBox<String> comboNivel) {
@@ -81,18 +88,22 @@ public class CadastroFuncionarios extends JFrame {
 			comboNivel.setSelectedItem(funcionario.getNivel_acesso());
 
 		} catch (SQLException ex) {
+
 			JOptionPane.showMessageDialog(null, "Descrição do erro:\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+
 		}
 
 	}
 
 	@SuppressWarnings("deprecation")
 	public void lerCampos(JComboBox<String> comboNivel) {
+
 		funcionario.setLogin(textLogin.getText());
 		funcionario.setNome(textNome.getText());
 		funcionario.setSenha(passwordSenha.getText());
 		funcionario.setEnquadramento_funcional(textEnquadramento_Funcional.getText());
 		funcionario.setNivel_acesso((String) comboNivel.getSelectedItem().toString());
+
 	}
 
 	public void limparCampos(JComboBox<String> comboFuncionario, JComboBox<String> comboNivel) {
@@ -101,9 +112,13 @@ public class CadastroFuncionarios extends JFrame {
 		comboNivel.removeAllItems();
 
 		try {
+
 			preencherCombos(comboFuncionario, comboNivel);
+
 		} catch (SQLException ex) {
+
 			JOptionPane.showMessageDialog(null, "Descrição do erro:\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+
 		}
 
 		textLogin.setText(null);
@@ -127,29 +142,41 @@ public class CadastroFuncionarios extends JFrame {
 				String nome_selecionado = (String) comboFuncionario.getSelectedItem().toString();
 
 				if (nome_selecionado.equals("<NOVO FUNCIONARIO>")) {
+
 					limparCampos(comboFuncionario, comboNivel);
 					comboFuncionario.setSelectedItem((String) "<NOVO FUNCIONARIO>");
+
 				} else {
+
 					preencherCampos(comboFuncionario, comboNivel);
+
 				}
+
 			}
 
 			public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
-
 			}
 
 		});
 
 		try {
+
 			regras.conecta();
+
 		} catch (SQLException ex) {
+
 			JOptionPane.showMessageDialog(null, "Descrição do erro:\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+
 		}
 
 		try {
+
 			preencherCombos(comboFuncionario, comboNivel);
+
 		} catch (SQLException ex) {
+
 			JOptionPane.showMessageDialog(null, "Cadastre ao menos um funcionário!", "Erro", JOptionPane.ERROR_MESSAGE);
+
 		}
 
 		setTitle("Cadastro/Altera\u00E7\u00E3o/Exclus\u00E3o");
@@ -184,18 +211,6 @@ public class CadastroFuncionarios extends JFrame {
 		JLabel lblFuncionario = new JLabel("Selecione o funcionário:");
 		lblFuncionario.setFont(new Font("Arial", Font.BOLD, 12));
 
-		addWindowListener(new WindowAdapter() {
-			public void windowClosing(WindowEvent arg0) {
-
-				try {
-					regras.desconecta();
-				} catch (SQLException ex) {
-					JOptionPane.showMessageDialog(null, "Descrição do erro:\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-				}
-
-			}
-		});
-
 		JButton btnCadastrar = new JButton("Cadastrar");
 		btnCadastrar.addMouseListener(new MouseAdapter() {
 			@Override
@@ -204,14 +219,19 @@ public class CadastroFuncionarios extends JFrame {
 				lerCampos(comboNivel);
 
 				try {
+
 					regras.cadastraFuncionario(funcionario);
+
 				} catch (SQLException ex) {
+
 					JOptionPane.showMessageDialog(null, "Descrição do erro:\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+
 				}
 
 				limparCampos(comboFuncionario, comboNivel);
 
 			}
+
 		});
 
 		JButton btnAlterar = new JButton("Alterar");
@@ -222,14 +242,19 @@ public class CadastroFuncionarios extends JFrame {
 				lerCampos(comboNivel);
 
 				try {
+
 					regras.atualizaFuncionario(funcionario);
+
 				} catch (SQLException ex) {
+
 					JOptionPane.showMessageDialog(null, "Descrição do erro:\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+
 				}
 
 				limparCampos(comboFuncionario, comboNivel);
 
 			}
+
 		});
 
 		JButton btnExcluir = new JButton("Excluir");
@@ -238,15 +263,20 @@ public class CadastroFuncionarios extends JFrame {
 			public void mouseClicked(MouseEvent arg0) {
 
 				try {
+
 					lerCampos(comboNivel);
 					regras.excluiFuncionario(funcionario.getLogin());
+
 				} catch (SQLException ex) {
+
 					JOptionPane.showMessageDialog(null, "Descrição do erro:\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+
 				}
 
 				limparCampos(comboFuncionario, comboNivel);
 
 			}
+
 		});
 
 		lblNivel = new JLabel("N\u00EDvel de Acesso ao Sistema");

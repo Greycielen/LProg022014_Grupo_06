@@ -29,7 +29,7 @@ public class Persistencia {
 
 	}
 
-	public void disconnection() throws SQLException {
+	public void desconexao() throws SQLException {
 
 		con.close();
 

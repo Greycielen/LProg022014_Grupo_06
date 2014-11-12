@@ -4,9 +4,6 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.io.IOException;
 import java.sql.SQLException;
 
 import javax.swing.GroupLayout;
@@ -42,13 +39,20 @@ public class CadastroProdutos extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+
 					CadastroProdutos frame = new CadastroProdutos();
 					frame.setVisible(true);
+
 				} catch (Exception ex) {
+
 					JOptionPane.showMessageDialog(null, "Descrição do erro:\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+
 				}
+
 			}
+
 		});
+
 	}
 
 	private void preencherCombo(JComboBox<String> comboProduto) throws SQLException {
@@ -58,6 +62,7 @@ public class CadastroProdutos extends JFrame {
 		for (int i = 0; i < regras.listaProdutos().size(); i++) {
 
 			comboProduto.addItem((String) regras.listaProdutos().get(i).toString());
+
 		}
 
 	}
@@ -78,7 +83,9 @@ public class CadastroProdutos extends JFrame {
 			textValor.setText("R$: " + produto.getValor());
 
 		} catch (SQLException ex) {
+
 			JOptionPane.showMessageDialog(null, "Descrição do erro:\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+
 		}
 
 	}
@@ -93,16 +100,24 @@ public class CadastroProdutos extends JFrame {
 	}
 
 	public void limpaCampos(JComboBox<String> comboProduto, JComboBox<String> comboEnquadramento) {
+
 		comboProduto.removeAllItems();
+
 		try {
+
 			preencherCombo(comboProduto);
+
 		} catch (SQLException ex) {
+
 			JOptionPane.showMessageDialog(null, "Descrição do erro:\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+
 		}
+
 		comboEnquadramento.setSelectedItem(null);
 		textCodigo.setText(null);
 		textNome.setText(null);
 		textValor.setText(null);
+
 	}
 
 	public CadastroProdutos() {
@@ -113,11 +128,14 @@ public class CadastroProdutos extends JFrame {
 			}
 
 			public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
+
 				lerCampos(comboEnquadramento);
+
 			}
 
 			public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
 			}
+
 		});
 
 		final JComboBox<String> comboProduto = new JComboBox<String>();
@@ -135,13 +153,16 @@ public class CadastroProdutos extends JFrame {
 					comboProduto.setSelectedItem((String) "<NOVO PRODUTO>");
 
 				} else {
+
 					preencheCampos(comboProduto, comboEnquadramento);
+
 				}
 
 			}
 
 			public void popupMenuWillBecomeVisible(PopupMenuEvent arg0) {
 			}
+
 		});
 
 		try {
@@ -152,16 +173,16 @@ public class CadastroProdutos extends JFrame {
 
 			JOptionPane.showMessageDialog(null, "Descrição do erro:\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
 
-		} catch (IOException ex) {
-
-			JOptionPane.showMessageDialog(null, "Descrição do erro:\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-
 		}
 
 		try {
+
 			preencherCombo(comboProduto);
+
 		} catch (SQLException ex) {
+
 			JOptionPane.showMessageDialog(null, "Cadastre ao menos um produto!", "Erro", JOptionPane.ERROR_MESSAGE);
+
 		}
 
 		setTitle("Cadastro/Alteração/Exclusão");
@@ -201,18 +222,6 @@ public class CadastroProdutos extends JFrame {
 		textValor = new JTextField();
 		textValor.setColumns(10);
 
-		addWindowListener(new WindowAdapter() {
-			public void windowClosing(WindowEvent arg0) {
-
-				try {
-					regras.desconecta();
-				} catch (SQLException ex) {
-					JOptionPane.showMessageDialog(null, "Descrição do erro:\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-				}
-
-			}
-		});
-
 		JButton btnCadastrar = new JButton("Cadastrar");
 		btnCadastrar.addMouseListener(new MouseAdapter() {
 			@Override
@@ -221,14 +230,19 @@ public class CadastroProdutos extends JFrame {
 				lerCampos(comboEnquadramento);
 
 				try {
+
 					regras.cadastraProduto(produto);
+
 				} catch (SQLException ex) {
+
 					JOptionPane.showMessageDialog(null, "Descrição do erro:\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+
 				}
 
 				limpaCampos(comboProduto, comboEnquadramento);
 
 			}
+
 		});
 
 		JButton btnAlterar = new JButton("Alterar");
@@ -239,14 +253,19 @@ public class CadastroProdutos extends JFrame {
 				lerCampos(comboEnquadramento);
 
 				try {
+
 					regras.atualizaProduto(produto);
+
 				} catch (SQLException ex) {
+
 					JOptionPane.showMessageDialog(null, "Descrição do erro:\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+
 				}
 
 				limpaCampos(comboProduto, comboEnquadramento);
 
 			}
+
 		});
 
 		JButton btnExcluir = new JButton("Excluir");
@@ -257,14 +276,19 @@ public class CadastroProdutos extends JFrame {
 				lerCampos(comboProduto);
 
 				try {
+
 					regras.excluiProduto(produto.getCodigo());
+
 				} catch (SQLException ex) {
+
 					JOptionPane.showMessageDialog(null, "Descrição do erro:\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+
 				}
 
 				limpaCampos(comboProduto, comboEnquadramento);
 
 			}
+
 		});
 
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);

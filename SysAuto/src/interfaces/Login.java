@@ -6,6 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.SQLException;
 
 import javax.swing.GroupLayout;
@@ -53,7 +55,9 @@ public class Login extends JFrame {
 			regras.conecta();
 
 		} catch (SQLException ex) {
+
 			JOptionPane.showMessageDialog(null, "Descrição do erro:\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+
 		}
 
 		setTitle("Login SysAuto");
@@ -92,6 +96,24 @@ public class Login extends JFrame {
 			public void mouseClicked(MouseEvent arg0) {
 
 				login();
+
+			}
+
+		});
+
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+
+				try {
+
+					regras.desconecta();
+
+				} catch (SQLException ex) {
+
+					JOptionPane.showMessageDialog(null, "Descrição do erro:\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+
+				}
 
 			}
 
