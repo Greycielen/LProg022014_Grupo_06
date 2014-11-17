@@ -17,7 +17,7 @@ public class Persistencia {
 	public Statement stm;
 	public ResultSet rs;
 	private String drive = "com.mysql.jdbc.Driver.jar";
-	private String endereco = "jdbc:mysql://127.0.0.1/sysautodb";
+	private String endereco = "jdbc:mysql://127.0.0.1/sysauto";
 	private String usuario = "root";
 	private String senha = "91778790";
 	public Connection con;
