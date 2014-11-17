@@ -42,6 +42,7 @@ public class SelecaoVeiculo extends JFrame {
 	}
 
 	public SelecaoVeiculo() {
+
 		setResizable(false);
 
 		setTitle("Sele\u00E7\u00E3o de Ve\u00EDculo");
