@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -16,8 +17,12 @@ import javax.swing.JPanel;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 
+import negocios.RegrasVeiculos;
+
 @SuppressWarnings("serial")
 public class SelecaoVeiculo extends JFrame {
+
+	RegrasVeiculos regras = new RegrasVeiculos();
 
 	private JPanel contentPane;
 
@@ -41,6 +46,18 @@ public class SelecaoVeiculo extends JFrame {
 
 	}
 
+	private void preencherCombo(JComboBox<String> comboVeiculo) throws SQLException {
+
+		comboVeiculo.addItem("<NOVO VEICULO>");
+
+		for (int i = 0; i < regras.listaVeiculos().size(); i++) {
+
+			comboVeiculo.addItem((String) regras.listaVeiculos().get(i).toString());
+
+		}
+
+	}
+
 	public SelecaoVeiculo() {
 
 		setResizable(false);
@@ -56,7 +73,17 @@ public class SelecaoVeiculo extends JFrame {
 		JLabel lblInstrucao = new JLabel("Selecione o ve\u00EDculo em que deseja trabalhar:");
 		lblInstrucao.setFont(new Font("Arial", Font.BOLD, 12));
 
-		final JComboBox<String> comboBox = new JComboBox<String>();
+		final JComboBox<String> comboSelecao = new JComboBox<String>();
+
+		try {
+
+			preencherCombo(comboSelecao);
+
+		} catch (SQLException ex) {
+
+			JOptionPane.showMessageDialog(null, "Descrição do erro:\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+
+		}
 
 		JButton btnConfirma = new JButton("Confirmar");
 		btnConfirma.addMouseListener(new MouseAdapter() {
@@ -75,14 +102,14 @@ public class SelecaoVeiculo extends JFrame {
 		gl_contentPane.setHorizontalGroup(gl_contentPane
 				.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup().addComponent(lblInstrucao).addContainerGap())
-				.addComponent(comboBox, 0, 279, Short.MAX_VALUE)
+				.addComponent(comboSelecao, 0, 279, Short.MAX_VALUE)
 				.addGroup(
 						Alignment.TRAILING,
 						gl_contentPane.createSequentialGroup().addContainerGap(94, Short.MAX_VALUE)
 								.addComponent(btnConfirma, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE).addGap(85)));
 		gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(
 				gl_contentPane.createSequentialGroup().addGap(6).addComponent(lblInstrucao).addPreferredGap(ComponentPlacement.UNRELATED)
-						.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(comboSelecao, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(ComponentPlacement.UNRELATED)
 						.addComponent(btnConfirma, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
 						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
